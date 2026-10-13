@@ -32,6 +32,15 @@ button{font-family:inherit;}
   align-items:center;
   justify-content:space-between;
   z-index:5;
+  opacity:0;
+  transform:translateY(-20px);
+  transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;
+}
+.hero.p4 .site-header{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
 }
 .site-header .logo img{height:28px;width:auto;}
 .gnb{
@@ -325,9 +334,14 @@ button{font-family:inherit;}
   height:auto;
   object-fit:contain;
   filter:grayscale(1);
-  transition:filter .25s ease;
+  opacity:.45;
+  transition:filter .3s ease, opacity .3s ease, transform .3s ease;
 }
-.partner-slot:hover img{filter:grayscale(0);}
+.partner-slot:hover img{
+  filter:grayscale(0);
+  opacity:1;
+  transform:scale(1.1);
+}
 
 /* ===================== Footer ===================== */
 .site-footer{
