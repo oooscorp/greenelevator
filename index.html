@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>그린엘리베이터 | GREEN ELEVATOR</title>
+<meta name="description" content="정직한 기술로 더 나은 내일을 향합니다 — 그린엘리베이터">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== 01 Hero / Intro ===================== -->
+<section class="hero" id="hero">
+
+  <header class="site-header">
+    <a href="#hero" class="logo"><img src="assets/logo.png" alt="그린엘리베이터"></a>
+    <nav class="gnb">
+      <a href="#">회사소개</a>
+      <a href="#products">제품소개</a>
+      <a href="#performance">실적</a>
+      <a href="#">유지보수</a>
+      <a href="#">교체공사</a>
+      <a href="#">고객지원</a>
+      <a href="#" class="lang-toggle">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#222" stroke-width="1.3"><circle cx="8" cy="8" r="6.6"></circle><ellipse cx="8" cy="8" rx="2.8" ry="6.6"></ellipse><line x1="1.4" y1="8" x2="14.6" y2="8"></line></svg>
+        KOR
+      </a>
+    </nav>
+  </header>
+
+  <div class="hero-label hero-label-left">
+    <div class="reveal-mask"><div class="reveal-el" data-reveal="s4">ArtiSafe :</div></div>
+  </div>
+  <div class="hero-label hero-label-right">
+    <div class="reveal-mask"><div class="reveal-el" data-reveal="s4">예술과 안전을<br>기술로 융합하다.</div></div>
+  </div>
+
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-slide is-active" style="background-image:url(assets/landscape-1.jpg)"></div>
+    <div class="hero-slide" style="background-image:url(assets/landscape-2.jpeg)"></div>
+    <div class="hero-slide" style="background-image:url(assets/landscape-3.jpeg)"></div>
+  </div>
+
+  <div class="door-layer" id="doorLayer">
+    <div class="door door-left" id="doorLeft">
+      <div class="door-text-wrap">
+        <div class="reveal-mask"><div class="reveal-el" data-reveal="s2">GREEN ELEVATOR</div></div>
+      </div>
+      <svg class="door-bracket door-bracket-left" width="16" height="60" viewBox="0 0 16 60"><polygon points="10,0 16,0 6,27 0,27" fill="#7a7a7a"></polygon><polygon points="0,33 6,33 16,60 10,60" fill="#7a7a7a"></polygon></svg>
+    </div>
+    <div class="door door-right" id="doorRight">
+      <div class="door-text-wrap">
+        <div class="reveal-mask"><div class="reveal-el" data-reveal="s2">THE STANDARD IN ELEVATORS</div></div>
+      </div>
+      <svg class="door-bracket door-bracket-right" width="16" height="60" viewBox="0 0 16 60"><polygon points="0,0 6,0 16,27 10,27" fill="#7a7a7a"></polygon><polygon points="10,33 16,33 6,60 0,60" fill="#7a7a7a"></polygon></svg>
+    </div>
+    <div class="door-seam" id="doorSeam"></div>
+  </div>
+
+  <div class="gauge-layer" id="gaugeLayer">
+    <div class="gauge-line" id="gaugeLine"></div>
+    <div class="gauge-number" id="gaugeNumber">
+      <div class="digits" id="gaugeDigits"></div>
+      <svg width="14" height="18" viewBox="0 0 14 18"><polygon points="7,0 14,17 7,13.2 0,17" fill="#5f5f5f"></polygon></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 Performance ===================== -->
+<section class="performance" id="performance">
+  <p class="performance-copy">2000년부터 축적해 온 경험과 자체 개발 특허 기술, 그리고 다양한 현장에서 완성한<br>프로젝트를 통해 그린엘리베이터의 기술력과 신뢰를 증명합니다.</p>
+  <div class="stat-grid" id="statGrid">
+    <div class="stat" data-final="1">
+      <div class="stat-glyph" data-stat-glyph></div>
+      <div class="stat-value">1위</div>
+      <div class="stat-label">조달청 관급자재 납품실적<br>13년연속 1위</div>
+    </div>
+    <div class="stat" data-final="5">
+      <div class="stat-glyph" data-stat-glyph></div>
+      <div class="stat-value">5위</div>
+      <div class="stat-label">시공능력순위<br>상위 5위(대기업포함)</div>
+    </div>
+    <div class="stat" data-final="A">
+      <div class="stat-glyph" data-stat-glyph></div>
+      <div class="stat-value">A등급</div>
+      <div class="stat-label">신용등급<br>우수기업 인증</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 06 Categories ===================== -->
+<section class="categories" id="products">
+  <div class="categories-sticky" id="categoriesSticky">
+    <div class="category-bgs" id="categoryBgs"></div>
+    <div class="categories-overlay"></div>
+    <div class="categories-content">
+      <div class="category-kicker">
+        <span class="is-on">승객용 엘리베이터</span>
+        <span class="divider"></span>
+        <span>화물용 엘리베이터</span>
+        <span class="divider"></span>
+        <span>에스컬레이터</span>
+      </div>
+      <div class="category-title" id="categoryTitle"></div>
+      <div class="category-list" id="categoryList"></div>
+      <div class="category-cta-row">
+        <a href="#" class="category-cta">자세히 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 07 Partners ===================== -->
+<section class="partners" id="performance-partners">
+  <div class="grid-lines"></div>
+  <div class="partners-inner">
+    <div class="partners-side">
+      <div class="partners-sticky">
+        <h2>Our Partners</h2>
+      </div>
+    </div>
+    <div class="partners-grid" id="partnersGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== 08 Footer ===================== -->
+<footer class="site-footer" id="support">
+  <div class="grid-lines grid-lines-dark"></div>
+  <div class="footer-inner">
+    <div class="footer-cta-row">
+      <a href="#" class="footer-cta" id="footerCta">
+        <span>안전한 이동의 시작, 그린엘리베이터와 함께하세요</span>
+        <svg class="footer-cta-arrow" width="34" height="16" viewBox="0 0 34 16" fill="none" stroke="#fff" stroke-width="1.6"><line x1="0" y1="8" x2="32" y2="8"></line><polyline points="25,1 32,8 25,15"></polyline></svg>
+      </a>
+    </div>
+    <div class="footer-top-row">
+      <button class="to-top" id="toTopBtn" aria-label="맨 위로">
+        <svg width="14" height="9" viewBox="0 0 14 9" fill="none" stroke="#fff" stroke-width="1.6"><polyline points="1,8 7,1.5 13,8"></polyline></svg>
+      </button>
+    </div>
+    <div class="footer-brand">
+      <img src="assets/logo-white.png" alt="그린엘리베이터">
+      <div class="footer-copy">Copyright &copy; 2020 Green Elevator CO.LTD.<br>All Rights Reserved.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">주소</div>
+      <div class="footer-col-value">경기도 평택시 오성면 오성산단로 36-19 (양교리)</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">전화번호</div>
+      <div class="footer-col-value">031-682-8931</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">팩스</div>
+      <div class="footer-col-value">031-682-8901</div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
