@@ -1,0 +1,101 @@
+/* Figma: 회사소개-기술력, 3:154, 1440 × 936 reference viewport. */
+.tech-page{background:#fff;}
+.tech-overlay{position:fixed;inset:0;z-index:10000;overflow:hidden;}
+.tech-overlay.is-done{visibility:hidden;pointer-events:none;}
+.tech-door{position:absolute;top:0;width:50%;height:100%;z-index:1;transition:transform 1.3s cubic-bezier(.65,0,.35,1);will-change:transform;}
+.tech-door-left{left:0;}
+.tech-door-right{right:0;}
+.tech-overlay.is-open .tech-door-left{transform:translateX(-100%);}
+.tech-overlay.is-open .tech-door-right{transform:translateX(100%);}
+.tech-door-copy{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#666;}
+.tech-copy-frame{overflow:hidden;font-size:clamp(14px,1.944444vw,36px);font-weight:700;line-height:1.5;white-space:nowrap;}
+.tech-copy-frame span{display:block;transform:translateY(110%);transition:transform .75s cubic-bezier(.22,1,.36,1);}
+.tech-copy-frame span.is-visible{transform:translateY(0);}
+.tech-bracket{position:absolute;top:calc(50% - 30px);width:15.5844px;height:60px;}
+.tech-bracket-left{right:40px;}.tech-bracket-right{left:40px;}
+.tech-door-seam{position:absolute;top:0;bottom:0;left:50%;width:1px;background:#666;opacity:.65;transition:none;z-index:30;pointer-events:none;}
+.tech-overlay.is-open .tech-door-seam{opacity:0;}
+.tech-header{position:fixed;left:0;right:0;top:0;z-index:100;opacity:0;transform:translateY(-100%);pointer-events:none;}
+.tech-header.is-visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+.tech-header.is-visible.is-hidden{transform:translateY(-100%);pointer-events:none;}
+.tech-innovation{position:relative;height:100svh;min-height:480px;overflow:hidden;color:#fff;}
+.tech-innovation-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;}
+.tech-innovation-shade{position:absolute;inset:0;background:rgba(0,0,0,.5);}
+.tech-innovation-copy{position:absolute;inset:0;}
+.tech-innovation-title-frame{position:absolute;left:0;right:0;top:37.179487%;height:1.5em;overflow:hidden;font-size:clamp(32px,5.555556vw,110px);line-height:1.5;text-align:center;}
+.tech-innovation-title-frame h1{font-size:inherit;line-height:inherit;font-weight:800;letter-spacing:0;white-space:nowrap;transform:translateY(110%);transition:transform .85s cubic-bezier(.22,1,.36,1);}
+.tech-innovation-title-frame h1.is-visible{transform:translateY(0);}
+.tech-innovation-body{position:absolute;left:50.694444%;top:57.692308%;font-size:clamp(13px,1.111111vw,20px);line-height:1.5;}
+.tech-innovation-body p{opacity:0;transition:opacity .35s ease;white-space:nowrap;}
+.tech-innovation-body p.is-visible{opacity:1;}
+.tech-content-track{position:relative;height:700svh;}
+.tech-content-stage{position:sticky;top:0;height:100svh;overflow:hidden;}
+.tech-stage-grid{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+.tech-description{position:absolute;left:9.027778%;top:12.606838%;width:calc(40.972222% - 30px);z-index:1;}
+.tech-heading-rule{height:1px;width:280px;max-width:100%;background:#111;margin-bottom:29px;}
+.tech-title-frame{position:relative;overflow:hidden;height:1.4em;font-size:clamp(25px,2.222222vw,44px);line-height:1.4;}
+.tech-title-slide{position:absolute;inset:0;font:inherit;font-weight:800;white-space:nowrap;transform:translateY(110%);transition:transform .65s cubic-bezier(.22,1,.36,1);}
+.tech-title-slide.is-current{transform:translateY(0);}
+.tech-title-slide.is-outgoing{transform:translateY(-110%);}
+.tech-subtitle{margin-top:8px;font-size:clamp(15px,1.388889vw,26px);font-weight:700;letter-spacing:-.4px;line-height:1.5;opacity:0;transition:opacity .3s ease;}
+.tech-body{margin-top:30px;width:212px;max-width:100%;font-size:14px;line-height:1.5;color:rgba(0,0,0,.7);opacity:0;transition:opacity .3s ease;}
+.tech-subtitle.is-visible,.tech-body.is-visible{opacity:1;}
+.tech-image-frame{position:absolute;left:50%;right:8.333333%;top:12.606838%;height:74.786325%;overflow:hidden;z-index:1;}
+.tech-image-slide{position:absolute;inset:0;overflow:hidden;transform:translateY(100%);transition:transform .65s cubic-bezier(.22,1,.36,1);}
+.tech-image-slide.is-current{transform:translateY(0);}
+.tech-image-slide.is-outgoing{transform:translateY(-100%);}
+.tech-image-slide img{width:100%;height:100%;object-fit:fill;max-width:none;}
+.tech-image-slide.is-tess img{position:absolute;width:233.333333%;left:-65.21%;height:100%;object-fit:fill;}
+.tech-steps{position:absolute;left:9.027778%;top:84.188034%;display:flex;gap:16px;z-index:1;}
+.tech-step-digit{width:16.4px;height:30px;display:block;}
+.tech-step-digit path{fill:#000;opacity:.04;transition:fill .3s ease,opacity .3s ease;}
+.tech-step-digit path.is-lit{opacity:.2;}
+.tech-step-digit.is-active path{opacity:.2;}
+.tech-step-digit.is-active path.is-lit{fill:#0d5b44;opacity:1;}
+@media(max-width:900px){
+ .tech-description{left:8.333333%;width:38%;}.tech-title-frame{font-size:24px;}.tech-subtitle{font-size:16px;}.tech-body{font-size:13px;}.tech-bracket-left{right:20px;}.tech-bracket-right{left:20px;}
+ .tech-innovation-body{left:50%;font-size:12px;}
+}
+@media(max-width:600px){
+ .tech-innovation-title-frame{font-size:7vw;}.tech-innovation-body{left:8.333333%;top:55%;font-size:12px;}.tech-copy-frame{font-size:14px;}.tech-bracket{width:8px;height:32px;top:calc(50% - 16px);}.tech-bracket-left{right:10px;}.tech-bracket-right{left:10px;}
+ .tech-description{left:8.333333%;right:8.333333%;width:auto;top:11%;}.tech-heading-rule{width:46%;margin-bottom:14px;}.tech-title-frame{font-size:24px;}.tech-subtitle{font-size:14px;}.tech-body{margin-top:12px;width:100%;font-size:12px;line-height:1.5;}.tech-image-frame{left:8.333333%;right:8.333333%;top:43%;height:44%;}.tech-steps{left:8.333333%;top:91%;gap:14px;}.tech-step-digit{width:13px;height:24px;}
+}
+@media(prefers-reduced-motion:reduce){.tech-door,.tech-copy-frame span,.tech-innovation-title-frame h1,.tech-title-slide,.tech-image-slide,.tech-subtitle,.tech-body,.tech-innovation-body p{transition:none;}}
+
+/* Direction belongs to each slide, so reversing never scales its contents. */
+.tech-bracket-right{transform:scaleX(-1);}
+.tech-image-slide{width:100%;height:100%;transform:translate3d(0,var(--enter-offset,100%),0);transition:transform .65s cubic-bezier(.22,1,.36,1);will-change:transform;}
+.tech-image-slide.is-current{transform:translate3d(0,0,0);}
+.tech-image-slide.is-outgoing{transform:translate3d(0,var(--exit-offset,-100%),0);}
+.tech-title-slide{transform:translate3d(0,var(--enter-offset,110%),0);}
+.tech-title-slide.is-current{transform:translate3d(0,0,0);}
+.tech-title-slide.is-outgoing{transform:translate3d(0,var(--exit-offset,-110%),0);}
+@media(prefers-reduced-motion:reduce){.tech-image-slide{transition:none;}}
+
+/* Only translation changes: image dimensions remain fixed throughout the travel. */
+.tech-image-slide{transition:transform .72s cubic-bezier(.4,0,.2,1);backface-visibility:hidden;}
+@media(prefers-reduced-motion:reduce){.tech-image-slide{transition:none;}}
+
+.tech-step-button{border:0;background:none;padding:6px; margin:-6px;cursor:pointer;touch-action:manipulation;}
+.tech-step-button:focus-visible{outline:2px solid #0d5b44;outline-offset:5px;border-radius:3px;}
+.tech-step-button:hover .tech-step-digit path.is-lit{fill:#0d5b44;opacity:.7;}
+
+/* Updated six-state content, exact Figma photographs and crop geometry. */
+.tech-description{width:280px;}
+.tech-body{width:280px;}
+.tech-heading-rule{height:2px;background:url(assets/tech-content-rule.svg) left center/100% 2px no-repeat;margin-bottom:28px;}
+.tech-photo-crop{position:absolute;inset:0;overflow:hidden;}
+.tech-photo-crop.is-mirrored{transform:scaleX(-1);}
+.tech-photo-crop img{position:absolute;inset:auto;left:0;top:0;width:100%;height:100%;object-fit:cover;}
+.tech-patent-sheet{position:absolute;left:9%;top:0;width:82.333333%;height:100%;border:1px solid #dfdfdf;overflow:hidden;}
+.tech-patent-sheet img.tech-patent-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.tech-patent-sheet img.tech-patent-layer-1{width:106.98%;height:104.49%;left:-3.36%;top:-2.53%;}
+.tech-patent-sheet img.tech-patent-layer-2{width:102.34%;height:101.53%;left:-1.06%;top:-.92%;}
+.tech-patent-sheet img.tech-patent-indicators{position:absolute;left:0;top:92.571429%;width:100%;height:auto;object-fit:contain;}
+.tech-content-stage.is-patent .tech-subtitle{display:none;}
+.tech-patent-row{display:grid;grid-template-columns:43px 1fr;gap:8px;padding:8px 0;font-size:12px;line-height:1.5;letter-spacing:-.24px;color:#111;white-space:pre-line;background:url(assets/tech-patent-rule.svg) left bottom/100% 1px no-repeat;}
+.tech-patent-row:first-child{padding-top:0;}.tech-patent-row:last-child{padding-bottom:0;background:none;}
+.tech-patent-row strong{font-weight:700;}
+.tech-content-stage.is-patent .tech-body{color:#111;}
+@media(max-width:900px){.tech-description{width:38%;}.tech-body{width:100%;}}
+@media(max-width:600px){.tech-description{width:auto;}.tech-body{width:100%;}.tech-patent-row{font-size:11px;}}

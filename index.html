@@ -7,27 +7,35 @@
 <meta name="description" content="정직한 기술로 더 나은 내일을 향합니다 — 그린엘리베이터">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="home.css?v=20261016-4">
+<link rel="stylesheet" href="site-navigation.css?v=20261016-4">
+<link rel="preload" href="assets/tech-silver.png" as="image">
 </head>
 <body>
 
 <!-- ===================== 01 Hero / Intro ===================== -->
 <section class="hero" id="hero">
 
-  <header class="site-header">
-    <a href="#hero" class="logo"><img src="assets/logo.png" alt="그린엘리베이터"></a>
-    <nav class="gnb">
-      <a href="#">회사소개</a>
-      <a href="#products">제품소개</a>
-      <a href="#performance">실적</a>
-      <a href="#">유지보수</a>
-      <a href="#">교체공사</a>
-      <a href="#">고객지원</a>
-      <a href="#" class="lang-toggle">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#222" stroke-width="1.3"><circle cx="8" cy="8" r="6.6"></circle><ellipse cx="8" cy="8" rx="2.8" ry="6.6"></ellipse><line x1="1.4" y1="8" x2="14.6" y2="8"></line></svg>
-        KOR
-      </a>
-    </nav>
-  </header>
+  <header class="site-header  gnb-shell">
+  <a href="index.html" class="logo"><img src="assets/logo.png" alt="그린엘리베이터"></a>
+  <nav class="gnb" aria-label="주 메뉴">
+    <div class="gnb-company">
+      <button type="button" class="gnb-company-toggle" aria-expanded="false" aria-controls="companyMenu">회사소개</button>
+      <div class="gnb-submenu" id="companyMenu" hidden>
+        <a href="about.html">회사개요</a>
+        <a href="tech.html">기술력</a>
+        <span aria-disabled="true">연혁</span>
+        <span aria-disabled="true">조직도</span>
+      </div>
+    </div>
+    <a href="index.html#products">제품소개</a>
+    <a href="index.html#performance">실적</a>
+    <a href="#">유지보수</a>
+    <a href="#">교체공사</a>
+    <a href="#support">고객지원</a>
+    <a href="#" class="lang-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><ellipse cx="8" cy="8" rx="2.8" ry="6.6"/><path d="M1.4 8h13.2"/></svg>KOR</a>
+  </nav>
+</header>
 
   <div class="hero-label hero-label-left">
     <div class="reveal-mask"><div class="reveal-el" data-reveal="s4">ArtiSafe :</div></div>
@@ -36,11 +44,16 @@
     <div class="reveal-mask"><div class="reveal-el" data-reveal="s4">예술과 안전을<br>기술로 융합하다.</div></div>
   </div>
 
-  <div class="hero-stage" id="heroStage">
-    <div class="hero-slide is-active" style="background-image:url(assets/landscape-1.jpg)"></div>
-    <div class="hero-slide" style="background-image:url(assets/landscape-2.jpeg)"></div>
-    <div class="hero-slide" style="background-image:url(assets/landscape-3.jpeg)"></div>
-  </div>
+  <a class="hero-stage" id="heroStage" href="about.html" aria-label="기업소개 보기">
+    <div class="hero-media" id="heroMedia" data-zone="0" data-transitioning="false">
+      <div class="hero-image-layer" data-image="0"><img src="assets/hero-lens-1.png" alt="그린엘리베이터 타워" fetchpriority="high"></div>
+    </div>
+    <span class="hero-follow" aria-hidden="true">
+      <span class="hero-follow-rule"><img src="assets/hero-hover-rule.svg" alt=""></span>
+      <span class="hero-follow-row"><span class="hero-follow-icon"><img src="assets/r4-home-up.svg" alt=""></span><span>MORE ABOUT US</span></span>
+      <span class="hero-follow-rule"><img src="assets/hero-hover-rule.svg" alt=""></span>
+    </span>
+  </a>
 
   <div class="door-layer" id="doorLayer">
     <div class="door door-left" id="doorLeft">
@@ -90,22 +103,16 @@
 </section>
 
 <!-- ===================== 06 Categories ===================== -->
-<section class="categories" id="products">
+<section class="categories home-products" id="products">
   <div class="categories-sticky" id="categoriesSticky">
     <div class="category-bgs" id="categoryBgs"></div>
     <div class="categories-overlay"></div>
     <div class="categories-content">
-      <div class="category-kicker">
-        <span class="is-on">승객용 엘리베이터</span>
-        <span class="divider"></span>
-        <span>화물용 엘리베이터</span>
-        <span class="divider"></span>
-        <span>에스컬레이터</span>
-      </div>
+      <p class="category-kicker" id="categoryEnglish">SEOUL NATIONAL UNIVERSITY</p>
       <div class="category-title" id="categoryTitle"></div>
       <div class="category-list" id="categoryList"></div>
       <div class="category-cta-row">
-        <a href="#" class="category-cta">자세히 보기</a>
+        <a href="#" class="category-cta"><span>VIEW MORE</span><span class="project-view-icon"><img src="assets/project-view-arrow.svg" alt=""></span></a>
       </div>
     </div>
   </div>
@@ -158,6 +165,8 @@
   </div>
 </footer>
 
-<script src="main.js"></script>
+<script src="site-navigation.js?v=20261016-4"></script>
+<script src="lens-zoom.js?v=20261016-4"></script>
+<script src="main.js?v=20261016-4"></script>
 </body>
 </html>

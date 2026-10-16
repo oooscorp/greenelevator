@@ -1,0 +1,35 @@
+/* Figma 2차수정 → 제품보러가기 (27:800), 1440 × 936 per state. */
+@font-face{font-family:'A2Z Projects';src:url('assets/a2z-medium.otf') format('opentype');font-weight:500;font-display:swap;}
+.tech-projects-track{position:relative;height:350svh;background:#fff;}
+.tech-projects-stage{position:sticky;top:0;height:100svh;overflow:hidden;isolation:isolate;--projects-copy-y:41.452991vh;}
+.projects-grid{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+.projects-mask-defs{position:absolute;pointer-events:none;}
+.projects-reveal{position:absolute;inset:0;z-index:1;clip-path:url(#projectsRevealClip);pointer-events:none;}
+.projects-media,.projects-image-layer{position:absolute;inset:0;overflow:hidden;transform-origin:50% 50%;}
+.projects-media{background:#111;}
+.projects-image-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;}
+.projects-image-layer[data-image="0"] img{inset:auto;left:.03%;top:-2.8%;width:109.18%;height:109%;object-fit:fill;}
+.lens-ghost{pointer-events:none;}
+.projects-copy-plane{position:absolute;inset:0;z-index:2;pointer-events:none;color:#000;}
+.projects-copy{position:absolute;left:0;right:0;top:0;transform:translate3d(0,var(--projects-copy-y),0);text-align:center;will-change:transform;}
+.projects-copy-white{z-index:3;color:#fff;clip-path:url(#projectsRevealClip);}
+.projects-title{font-family:'A2Z Projects',Arial,sans-serif;font-size:clamp(22px,5.555556vw,100px);font-weight:500;line-height:1.5;letter-spacing:0;}
+/* Text motion 1: identical to the current company-overview S1 line reveal. */
+.text-motion-1-line{display:block;overflow:hidden;width:max-content;max-width:100%;margin:0 auto;}
+.text-motion-1-line>span{display:block;white-space:nowrap;transform:translateY(110%);transition:transform .85s cubic-bezier(.4,0,.2,1);}
+.text-motion-1-line:nth-child(2)>span{transition-delay:.325s;}
+.tech-projects-stage.is-text-visible .text-motion-1-line>span{transform:translateY(0);}
+.projects-subtitle{font-size:20px;font-weight:400;line-height:1.5;letter-spacing:-.4px;margin-top:10px;opacity:0;transition:opacity .6s ease;}
+.tech-projects-stage.is-copy-visible .projects-subtitle{opacity:1;}
+.projects-follow{position:absolute;left:8.333333%;right:8.333333%;top:0;z-index:4;height:72px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;opacity:0;pointer-events:none;transform:translate3d(0,var(--projects-follow-y,32px),0);transition:opacity .2s ease;}
+.tech-projects-stage.is-revealed.is-hovered .projects-follow{opacity:1;pointer-events:auto;}
+.tech-projects-stage.is-revealed .projects-follow:focus-visible{opacity:1;pointer-events:auto;outline:2px solid white;outline-offset:8px;}
+.projects-follow-rule{width:100%;height:1.01409px;display:block;background:url('assets/tech-projects-rule.svg') center/100% 100% no-repeat;}
+.projects-follow-row{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:700;line-height:1.5;}
+.projects-follow-icon{display:flex;align-items:center;justify-content:center;flex:none;width:40px;height:40px;}
+.projects-follow-icon img{display:block;max-width:none;}
+.projects-follow-icon[data-zone="1"],.projects-follow-icon[data-zone="2"]{background:#fff;border-radius:50%;}
+.projects-follow-icon[data-zone="1"] img,.projects-follow-icon[data-zone="2"] img{width:13.073px;height:12.9px;}
+.projects-follow-icon[data-zone="2"] img{transform:rotate(45deg);}
+@media(max-width:700px){.projects-title{font-size:5.555556vw;}.projects-subtitle{font-size:clamp(12px,2.7vw,18px);margin:10px 24px 0;letter-spacing:-.24px;}.projects-follow{left:24px;right:24px;}.projects-follow-row{font-size:14px;}}
+@media(prefers-reduced-motion:reduce){.text-motion-1-line>span,.projects-subtitle,.projects-follow{transition:none;}}

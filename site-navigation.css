@@ -1,0 +1,67 @@
+/* Shared navigation follows Figma GNB(펼침), node 8:387. */
+.site-header.gnb-shell{height:60px;padding:16px 8.333333vw;align-items:flex-start;background:#fff;border-bottom:1px solid #dfdfdf;transition:height .2s ease,opacity .8s cubic-bezier(.22,1,.36,1),transform .3s ease;}
+.site-header.gnb-shell .logo{width:150px;height:28px;flex-shrink:0;display:flex;align-items:center;}
+.site-header.gnb-shell .logo img{width:150px;height:auto;}
+.gnb-shell .gnb{gap:clamp(20px,3.47222vw,50px);height:28px;font-size:16px;line-height:1.5;}
+.gnb-shell .lang-toggle{margin-left:10px;font-size:14px;}
+.gnb-company{position:relative;}
+.gnb-company-toggle{display:block;padding:4px 0;border:0;border-bottom:1.5px solid transparent;background:none;color:#000;font:inherit;line-height:1.5;cursor:pointer;white-space:nowrap;}
+.gnb-shell.is-expanded{height:102px;}
+.gnb-shell.is-expanded .gnb-company-toggle{border-bottom-color:#0d5b44;}
+.gnb-submenu{position:absolute;top:48px;left:0;display:flex;gap:30px;align-items:center;height:20px;white-space:nowrap;font-size:14px;color:#999;}
+.gnb-submenu[hidden]{display:none;}
+.gnb-submenu a[aria-current="page"]{font-weight:700;color:#000;}
+.gnb-submenu a:is(:hover,:focus-visible){color:#0d5b44;}
+.gnb-submenu span{cursor:default;}
+.silver-door,.hero .door{background-color:#ddd;background-image:url(assets/tech-silver.png),url(assets/tech-silver-base.png);background-repeat:no-repeat;background-size:200% 100%;}
+.silver-door.tech-door-left,.silver-door.navigation-door-left{background-position:left center;}
+.silver-door.tech-door-right,.silver-door.navigation-door-right{background-position:right center;}
+.navigation-curtain{position:fixed;inset:0;z-index:10000;pointer-events:all;overflow:hidden;}
+.navigation-door{position:absolute;top:0;width:50%;height:100%;transition:transform .9s cubic-bezier(.65,0,.35,1);will-change:transform;}
+.navigation-door-left{left:0;transform:translateX(-100%);}
+.navigation-door-right{right:0;transform:translateX(100%);}
+.navigation-curtain.is-closed .navigation-door{transform:translateX(0);}
+@media(max-width:1100px){.gnb-shell .gnb{gap:24px;font-size:14px;}.site-header.gnb-shell{padding-left:5vw;padding-right:5vw;}}
+@media(max-width:900px){.site-header.gnb-shell{padding-left:24px;padding-right:24px;}.gnb-shell .gnb-submenu a{display:block;}.gnb-submenu{left:auto;right:0;gap:24px;}.gnb-shell .gnb{gap:20px;}.gnb-shell .lang-toggle{margin-left:0;}}
+@media(prefers-reduced-motion:reduce){.navigation-door{transition:none;}.site-header.gnb-shell{transition:none;}}
+
+/* Visible center seam bridges the source-page closing doors and destination intro. */
+.navigation-door-seam{position:absolute;top:0;bottom:0;left:50%;width:1px;transform:translateX(-50%);background:#666;opacity:0;pointer-events:none;z-index:30;}
+
+.navigation-curtain.doors-shut .navigation-door-seam{opacity:.65;}
+
+/* Door travel: continuous acceleration and a quiet, long deceleration; no overshoot. */
+.door-motion-defs{position:fixed;width:0;height:0;overflow:hidden;pointer-events:none;}
+.hero .door,.tech-door,.navigation-door{isolation:isolate;transition-timing-function:cubic-bezier(.78,0,.18,1);}
+.hero .door{--door-travel-time:2.1s;}
+.tech-door{--door-travel-time:2.1s;}
+.navigation-door{--door-travel-time:2.1s;}
+/* A faint horizontally filtered copy of the metal surface; foreground stays sharp. */
+.hero .door::after,.tech-door::after,.navigation-door::after{content:'';position:absolute;inset:0;z-index:0;background:inherit;filter:url(#door-panel-horizontal-blur);opacity:0;pointer-events:none;will-change:opacity;}
+.hero .door-text-wrap,.hero .door-bracket,.tech-door-copy,.tech-bracket{z-index:2;}
+.hero.p3 .door::after,.tech-overlay.is-open .tech-door::after,.navigation-curtain.is-closed .navigation-door::after{animation:doorPanelDirectionalBlur var(--door-travel-time) linear both;}
+@keyframes doorPanelDirectionalBlur{
+  0%,22%{opacity:0;}
+  36%{opacity:.2;}
+  50%{opacity:.6;}
+  64%{opacity:.2;}
+  78%,100%{opacity:0;}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero .door,.tech-door,.navigation-door{transition:none;}
+ .hero .door::after,.tech-door::after,.navigation-door::after{animation:none!important;filter:none;will-change:auto;}
+}
+
+/* V1 panel motion is driven by the shared WAAPI profile, including its 8% hold. */
+.tech-innovation-photo{transform-origin:center;}
+@keyframes doorPanelDirectionalBlur{
+  0%,35%{opacity:0;}
+  48%{opacity:.2;}
+  59%{opacity:.6;}
+  70%{opacity:.2;}
+  84%,100%{opacity:0;}
+}
+
+/* Begin travel immediately; the seam disappears alongside the moving panels. */
+.hero .door,.tech-door,.navigation-door{--door-travel-time:1.45s;}
+.hero.p3 .door-seam,.tech-overlay.is-open .tech-door-seam{opacity:0;transition:opacity .1s linear;}
