@@ -43,11 +43,14 @@
     var minY=Math.max(12,subtitle.getBoundingClientRect().bottom-rect.top+40);
     var maxY=Math.max(minY,rect.height-follow.offsetHeight-12);
     var y=pointer?pointer.y-rect.top:0;
-    follow.style.setProperty('--projects-follow-y',clamp(pointer?y-36:minY,minY,maxY)+'px');
+    var followY=clamp(pointer?y-36:minY,minY,maxY);
+    follow.style.setProperty('--projects-follow-y',followY+'px');
     var inside=pointer&&pointer.x>=rect.left&&pointer.x<=rect.right&&pointer.y>=rect.top&&pointer.y<=rect.bottom;
     stage.classList.toggle('is-hovered',!!(revealed&&inside));
     if(!revealed||!inside)return;
-    lens.show(clamp(Math.floor(y/rect.height*3),0,2));
+    // Divide the graphic's permitted travel range, not the full image height.
+    var zoneProgress=maxY>minY?(followY-minY)/(maxY-minY):0;
+    lens.show(clamp(Math.floor(zoneProgress*3),0,2));
   }
   function update(now){
     queued=false;

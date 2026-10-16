@@ -89,10 +89,9 @@
     setPhase(2);
     later(() => {
       setPhase(3);
-      // Move the actual shrink 1000ms earlier relative to the opening doors.
-      // Keep navigation hidden until the door opening has completed.
-      later(() => setPhase(4), Math.max(0, window.GreenDoorMotion.total - 1000));
       later(() => {
+        // Restore the shrink to the moment the doors finish opening.
+        setPhase(4);
         enableHomeNavigation();
         later(() => {
           setPhase(5);
