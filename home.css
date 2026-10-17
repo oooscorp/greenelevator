@@ -165,3 +165,7 @@ body .grid-lines-dark::before{--grid-color:#3a3a3a;}
 .hero-follow-icon[data-zone="0"] img{width:40px;height:40px;transform:none;}
 .hero-follow-icon[data-zone="1"] img{width:13.072px;height:12.9px;transform:none;}
 .hero-follow-icon[data-zone="2"] img{width:13.073px;height:12.901px;transform:rotate(45deg);}
+
+/* The Figma hero frame now contains only the supplied looping video. */
+.hero-video-stage{cursor:default;}
+.hero-video-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;}

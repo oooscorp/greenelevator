@@ -97,8 +97,6 @@
       overlay.classList.add('is-done'); header.classList.add('is-visible');
       document.documentElement.style.overflow = ''; revealInnovation(); return;
     }
-    later(introTimers, function () { document.getElementById('s2Left').classList.add('is-visible'); }, 180);
-    later(introTimers, function () { document.getElementById('s2Right').classList.add('is-visible'); }, 960);
     later(introTimers, function () {
       overlay.classList.add('is-open');
       window.GreenDoorMotion.open(overlay.querySelector('.tech-door-left'),overlay.querySelector('.tech-door-right'),document.querySelector('.tech-innovation-photo'));
@@ -150,8 +148,11 @@
     slide.replaceChildren();
     if(item.patent) {
       var sheet=document.createElement('div');sheet.className='tech-patent-sheet';
-      [1,2,3,4].forEach(function(n){var image=document.createElement('img');image.src='assets/tech-patent-'+n+'.png';image.alt=n===4?'엘리베이터 처짐방지용 정위치 클램핑 및 비상제동 장치 특허증':'';image.className='tech-patent-layer tech-patent-layer-'+n;sheet.appendChild(image);});
-      var indicators=document.createElement('img');indicators.src='assets/tech-patent-indicators.svg';indicators.alt='';indicators.className='tech-patent-indicators';sheet.appendChild(indicators);slide.appendChild(sheet);
+      var sources=['assets/tech-patent-4.png','assets/patent-select-2.png','assets/patent-select-3.png','assets/patent-select-4.png'];
+      var image=document.createElement('img');image.src=sources[0];image.alt='특허증 1';image.className='tech-patent-selected';sheet.appendChild(image);
+      var indicators=document.createElement('div');indicators.className='tech-patent-buttons';indicators.setAttribute('aria-label','증서 선택');
+      sources.forEach(function(src,index){var button=document.createElement('button');button.type='button';button.className='tech-patent-dot';button.setAttribute('aria-label','증서 '+(index+1));button.setAttribute('aria-pressed',String(index===0));button.addEventListener('click',function(){image.src=src;image.alt='증서 '+(index+1);image.classList.toggle('is-credit',index===1);image.animate([{opacity:0},{opacity:1}],{duration:260});indicators.querySelectorAll('button').forEach(function(dot,i){dot.setAttribute('aria-pressed',String(i===index));});});indicators.appendChild(button);});
+      sheet.appendChild(indicators);slide.appendChild(sheet);
     } else {
       var crop=document.createElement('div');crop.className='tech-photo-crop';
       if(item.mirror)crop.classList.add('is-mirrored');

@@ -7,7 +7,8 @@
 <meta name="description" content="정직한 기술로 더 나은 내일을 향합니다 — 그린엘리베이터">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="home.css?v=20261016-4">
+<link rel="stylesheet" href="home.css?v=20261016-7">
+<link rel="stylesheet" href="home-products.css?v=20261017-1">
 <link rel="stylesheet" href="site-navigation.css?v=20261016-4">
 <link rel="preload" href="assets/tech-silver.png" as="image">
 </head>
@@ -28,7 +29,7 @@
         <span aria-disabled="true">조직도</span>
       </div>
     </div>
-    <a href="index.html#products">제품소개</a>
+    <a href="products.html">제품소개</a>
     <a href="index.html#performance">실적</a>
     <a href="#">유지보수</a>
     <a href="#">교체공사</a>
@@ -44,16 +45,11 @@
     <div class="reveal-mask"><div class="reveal-el" data-reveal="s4">예술과 안전을<br>기술로 융합하다.</div></div>
   </div>
 
-  <a class="hero-stage" id="heroStage" href="about.html" aria-label="기업소개 보기">
-    <div class="hero-media" id="heroMedia" data-zone="0" data-transitioning="false">
-      <div class="hero-image-layer" data-image="0"><img src="assets/hero-lens-1.png" alt="그린엘리베이터 타워" fetchpriority="high"></div>
+  <div class="hero-stage hero-video-stage" id="heroStage">
+    <div class="hero-media" id="heroMedia">
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto" aria-label="그린엘리베이터 메인 영상"><source src="assets/main-hero.mp4" type="video/mp4"></video>
     </div>
-    <span class="hero-follow" aria-hidden="true">
-      <span class="hero-follow-rule"><img src="assets/hero-hover-rule.svg" alt=""></span>
-      <span class="hero-follow-row"><span class="hero-follow-icon"><img src="assets/r4-home-up.svg" alt=""></span><span>MORE ABOUT US</span></span>
-      <span class="hero-follow-rule"><img src="assets/hero-hover-rule.svg" alt=""></span>
-    </span>
-  </a>
+  </div>
 
   <div class="door-layer" id="doorLayer">
     <div class="door door-left" id="doorLeft">
@@ -102,18 +98,26 @@
   </div>
 </section>
 
-<!-- ===================== 06 Categories ===================== -->
-<section class="categories home-products" id="products">
-  <div class="categories-sticky" id="categoriesSticky">
-    <div class="category-bgs" id="categoryBgs"></div>
-    <div class="categories-overlay"></div>
-    <div class="categories-content">
-      <p class="category-kicker" id="categoryEnglish">SEOUL NATIONAL UNIVERSITY</p>
-      <div class="category-title" id="categoryTitle"></div>
-      <div class="category-list" id="categoryList"></div>
-      <div class="category-cta-row">
-        <a href="#" class="category-cta"><span>VIEW MORE</span><span class="project-view-icon"><img src="assets/project-view-arrow.svg" alt=""></span></a>
-      </div>
+<!-- ===================== 06 Products: one fixed reveal stage ===================== -->
+<section class="home-product-track" id="products" aria-labelledby="productHeading">
+  <div class="home-product-stage" id="productStage" data-zone="0">
+    <svg class="product-mask-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><clipPath id="productRevealClip" clipPathUnits="objectBoundingBox"><rect id="productMaskLeft" x="0" y="0" width="0" height="1"/><rect id="productMaskRight" x="1" y="0" width="0" height="1"/></clipPath></defs></svg>
+    <div class="product-reveal" id="productReveal" aria-hidden="true">
+      <div class="product-media" id="productMedia" data-zone="0"><div class="product-image-layer" data-image="0"><img src="assets/home-product-seoul.png" alt=""></div></div>
+      <div class="product-shade"></div>
+    </div>
+    <div class="product-copy-plane"><div class="product-copy">
+      <h2 class="product-heading product-line-frame" id="productHeading"></h2>
+      <p class="product-subheading product-line-frame"></p>
+    </div></div>
+    <div class="product-copy-plane product-copy-white" aria-hidden="true"><div class="product-copy">
+      <div class="product-heading product-line-frame"></div>
+      <div class="product-subheading product-line-frame"></div>
+    </div></div>
+    <div class="product-follow" id="productFollow" aria-hidden="true">
+      <span class="product-follow-rule"></span>
+      <span class="product-follow-row"><span class="product-follow-icon" data-zone="0"><img src="assets/home-product-up.svg" alt="" width="40" height="40"></span><span id="productType">승객용 엘리베이터</span></span>
+      <span class="product-follow-rule"></span>
     </div>
   </div>
 </section>
@@ -167,6 +171,7 @@
 
 <script src="site-navigation.js?v=20261016-4"></script>
 <script src="lens-zoom.js?v=20261016-4"></script>
-<script src="main.js?v=20261016-6"></script>
+<script src="main.js?v=20261016-7"></script>
+<script src="home-products.js?v=20261017-1"></script>
 </body>
 </html>

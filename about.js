@@ -191,14 +191,9 @@
 
   /* ===================== S5 — Circular diagram ===================== */
   var s5Wrap = document.getElementById('s5');
-  var s5Gauge = s5Wrap ? s5Wrap.querySelector('.s5-gauge') : null;
   var s5Nodes = s5Wrap ? s5Wrap.querySelectorAll('.s5-node') : [];
-  var s5Items = s5Wrap ? s5Wrap.querySelectorAll('.s5-item') : [];
-  var CIRC = 2 * Math.PI * 150; // ~754
-  var s5Phase = -1;
-  var orbitLogo = document.getElementById('s5OrbitLogo');
-  var orbitRaf = null;
-  var orbitAngle = Math.atan2(-140,203);
+  var s5Phase = -1, previousDiagramNode = -1;
+  var hoverGauge = document.getElementById('s5HoverGauge');
   function fitDiagram() {
     var stage = document.getElementById('s5DiagramStage');
     if (!stage) return;
@@ -208,39 +203,29 @@
     stage.style.transform = 'scale(' + scale + ')';
     s5Wrap.style.setProperty('--diagram-top', Math.max(0,(parent.clientHeight-720*scale)/2)+'px');
   }
-  function moveOrbit(target, done) {
-    if (!orbitLogo) return;
-    cancelAnimationFrame(orbitRaf);
-    var from = orbitAngle, start = performance.now();
-    function tick(now) {
-      var t = Math.min(1, (now - start) / 800);
-      var eased = t * t * (3 - 2 * t);
-      orbitAngle = from + (target - from) * eased;
-      orbitLogo.style.left = (50 + (250 / 720 * 100) * Math.cos(orbitAngle)) + '%';
-      orbitLogo.style.top = (50 + (250 / 720 * 100) * Math.sin(orbitAngle)) + '%';
-
-      if (t < 1) orbitRaf = requestAnimationFrame(tick);
-      else if (done) done();
-    }
-    orbitRaf = requestAnimationFrame(tick);
-  }
-
   function selectDiagramNode(index) {
-    if (!orbitLogo || index === s5Phase) return;
+    if (!hoverGauge || index === s5Phase) return;
+    var progress=index===0 && previousDiagramNode===3?100:index*25;
     s5Phase = index;
+    previousDiagramNode=index;
     s5Wrap.dataset.selectedNode = String(index);
-    s5Nodes.forEach(function (node, i) {
-      node.classList.toggle('is-active', i === index);
-      node.setAttribute('aria-pressed', String(i === index));
+    s5Nodes.forEach(function(node,i){
+      node.classList.toggle('is-active',i===index);
+      node.setAttribute('aria-pressed',String(i===index));
     });
-    // The top node is the zero point; right, bottom and left are quarter turns.
-    var desired=-Math.PI/2+index*Math.PI/2;
-    var difference=Math.atan2(Math.sin(desired-orbitAngle),Math.cos(desired-orbitAngle));
-    moveOrbit(orbitAngle+difference);
+    // Clockwise from the existing 12 o'clock origin: 0 / 25 / 50 / 75%.
+    hoverGauge.style.strokeDashoffset = String(100-progress);
+    hoverGauge.dataset.progress = String(progress);
   }
-  orbitLogo.style.left=(50+(250/720*100)*Math.cos(orbitAngle))+'%';
-  orbitLogo.style.top=(50+(250/720*100)*Math.sin(orbitAngle))+'%';
+  function resetDiagram(){
+    s5Phase=-1;
+    hoverGauge.style.strokeDashoffset="100";hoverGauge.dataset.progress="0";
+    s5Nodes.forEach(function(node){node.classList.remove("is-active");node.setAttribute("aria-pressed","false");});
+  }
   s5Nodes.forEach(function (node, index) {
+    node.addEventListener("pointerleave",resetDiagram);
+    node.addEventListener("blur",function(){if(s5Phase===index)resetDiagram();});
+    node.addEventListener("focus",function(){if(node.matches(":focus-visible"))selectDiagramNode(index);});
     node.addEventListener('pointerenter', function (event) { if (event.pointerType !== 'touch') selectDiagramNode(index); });
     node.addEventListener('click', function () { selectDiagramNode(index); });
     node.addEventListener('keydown', function (event) {
@@ -384,65 +369,6 @@
     if(inside)detailsPlane.style.setProperty('--details-y',clamp(event.clientY-rect.top-36,12,Math.max(12,rect.height-84))+'px');
   });
   s7Frame.addEventListener('pointerleave',function(){detailsPlane.classList.remove('is-hovered');});
-
-  /* ===================== S10 — Map interaction ===================== */
-  var offices = document.querySelectorAll('.s10-office');
-  var pins = document.querySelectorAll('.s10-pin');
-  var thumb = document.getElementById('s10Thumb');
-  var mapSvg = document.querySelector('.s10-map-svg');
-  var moreBtn = document.getElementById('s10More');
-  var extraDiv = document.getElementById('s10Extra');
-
-  var PIN_POS = {
-    hq: {x:144,y:238,label:'본사 및 제1공장'},
-    siheung: {x:102,y:155,label:'시흥캠퍼스'},
-    seoul: {x:150,y:139,label:'서울 기술혁신본부'},
-    hwaseong: {x:127,y:172,label:'화성캠퍼스'},
-    busan: {x:363,y:499,label:'부산지사'},
-    daejeon: {x:176,y:361,label:'대전지사'},
-    gyeonggi: {x:137,y:105,label:'경기북부지사'},
-    daegu: {x:299,y:379,label:'대구지사'},
-    gwangju: {x:129,y:277,label:'광주지사'},
-    ulsan: {x:383,y:462,label:'울산지사'},
-    jeju: {x:55,y:650,label:'제주지사'}
-  };
-
-  function activateOffice(key) {
-    offices.forEach(function (o) { o.classList.toggle('is-active', o.dataset.office === key); });
-    pins.forEach(function (p) { p.classList.toggle('is-active', p.dataset.pin === key); });
-
-    if (thumb && mapSvg && PIN_POS[key]) {
-      var info = PIN_POS[key];
-      var svgRect = mapSvg.getBoundingClientRect();
-      var vb = mapSvg.viewBox.baseVal;
-      var scaleX = svgRect.width / vb.width;
-      var scaleY = svgRect.height / vb.height;
-      thumb.querySelector('span').textContent = info.label;
-      var thumbImage = document.getElementById('s10ThumbImg');
-      thumbImage.style.backgroundImage = key === 'hq' ? 'url(assets/office-hq.png)' : '';
-      thumb.style.left = Math.min(info.x * scaleX + 24, Math.max(0, svgRect.width - thumb.offsetWidth)) + 'px';
-      thumb.style.top = Math.max(0, Math.min(info.y * scaleY - 24, svgRect.height - thumb.offsetHeight)) + 'px';
-      thumb.classList.add('is-visible');
-    }
-  }
-
-  function deactivateAll() {
-    offices.forEach(function (o) { o.classList.remove('is-active'); });
-    pins.forEach(function (p) { p.classList.remove('is-active'); });
-    if (thumb) thumb.classList.remove('is-visible');
-  }
-
-  offices.forEach(function (o) {
-    o.addEventListener('mouseenter', function () { activateOffice(o.dataset.office); });
-    o.addEventListener('mouseleave', deactivateAll);
-  });
-
-  if (moreBtn && extraDiv) {
-    moreBtn.addEventListener('click', function () {
-      extraDiv.classList.toggle('is-open');
-      moreBtn.style.display = extraDiv.classList.contains('is-open') ? 'none' : '';
-    });
-  }
 
   /* ===================== Scroll to top ===================== */
   var toTopBtn = document.getElementById('toTopBtn');

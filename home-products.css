@@ -1,0 +1,32 @@
+@font-face{font-family:'A2Z Product';src:url('assets/a2z-regular.otf') format('opentype');font-weight:400;font-display:swap;}
+/* Figma 29:368 — all four frames describe states of this single pinned stage. */
+.home-product-track{position:relative;height:375svh;background:#fff;}
+.home-product-stage{position:sticky;top:0;height:100svh;overflow:hidden;isolation:isolate;}
+.product-mask-defs{position:absolute;pointer-events:none;}
+.product-reveal{position:absolute;inset:0;clip-path:url(#productRevealClip);z-index:1;pointer-events:none;}
+.product-media,.product-image-layer{position:absolute;inset:0;overflow:hidden;transform-origin:center;}
+.product-media{background:#111;z-index:0;}
+.product-image-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;}
+.product-image-layer[data-image="0"] img{inset:auto;left:-8.49%;top:-8.75%;width:116.99%;height:120%;object-fit:fill;}
+.product-image-layer[data-image="2"] img{object-position:center bottom;}
+.product-shade{position:absolute;inset:0;z-index:1;background:rgba(0,0,0,.3);}
+.product-copy-plane{position:absolute;inset:0;z-index:2;pointer-events:none;color:#000;}
+.product-copy-white{z-index:3;color:#fff;clip-path:url(#productRevealClip);}
+.product-copy{position:absolute;left:24px;right:24px;top:0;transform:translate3d(0,var(--product-copy-y,calc(50svh - 78px)),0);text-align:center;will-change:transform;}
+.product-heading{font-family:Pretendard,sans-serif;font-size:clamp(28px,5vw,90px);font-weight:800;line-height:1.5;}
+.product-subheading{font-family:'A2Z Product',Pretendard,sans-serif;font-size:clamp(12px,1.666667vw,30px);font-weight:400;line-height:1.5;margin-top:12px;text-transform:uppercase;}
+.product-line-frame{position:relative;height:1.5em;overflow:hidden;}
+.product-line-frame>span{position:absolute;inset:0;display:block;white-space:nowrap;transform:translateY(var(--title-in,110%));transition:transform .85s cubic-bezier(.4,0,.2,1);}
+.product-line-frame>span.is-current{transform:translateY(0);}
+.product-line-frame>span.is-outgoing{transform:translateY(var(--title-out,-110%));}
+.product-follow{position:absolute;left:8.333333%;right:8.333333%;top:0;height:72px;z-index:4;display:flex;flex-direction:column;justify-content:space-between;color:#fff;opacity:0;pointer-events:none;transform:translate3d(0,var(--product-follow-y,326px),0);transition:opacity .2s ease;}
+.home-product-stage.is-revealed.is-hovered .product-follow{opacity:1;}
+.product-follow-rule{display:block;width:100%;height:1.01409px;background:url('assets/home-product-rule.svg') center/100% 100% no-repeat;}
+.product-follow-row{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:700;line-height:1.5;}
+.product-follow-icon{display:flex;align-items:center;justify-content:center;flex:none;width:40px;height:40px;}
+.product-follow-icon img{display:block;max-width:none;}
+.product-follow-icon[data-zone="1"],.product-follow-icon[data-zone="2"]{border-radius:50%;background:#fff;}
+.product-follow-icon[data-zone="1"] img,.product-follow-icon[data-zone="2"] img{width:13.073px;height:12.901px;}
+.product-follow-icon[data-zone="2"] img{transform:rotate(45deg);}
+@media(max-width:650px){.product-copy{left:12px;right:12px;}.product-heading{font-size:clamp(25px,5vw,40px);}.product-subheading{font-size:clamp(11px,2.4vw,16px);margin-top:12px;}.product-follow{left:24px;right:24px;}.product-follow-row{font-size:14px;}}
+@media(prefers-reduced-motion:reduce){.product-line-frame>span,.product-follow{transition:none;}}

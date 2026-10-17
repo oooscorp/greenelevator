@@ -131,35 +131,11 @@
     hero.classList.remove('seam-on');
   }
 
-  const heroStage = document.getElementById('heroStage');
-  const heroMedia = document.getElementById('heroMedia');
-  const follow = heroStage.querySelector('.hero-follow');
-  const HERO_IMAGES = [
-    {src:'assets/hero-lens-1.png',alt:'그린엘리베이터 타워'},
-    {src:'assets/hero-lens-2.png',alt:'유리 외벽으로 둘러싸인 건축 공간'},
-    {src:'assets/hero-lens-3.png',alt:'건물 내부 엘리베이터'}
-  ];
-  const heroLens = window.GreenLensZoom(heroMedia, HERO_IMAGES, {
-    onChange(zone) {
-      const icon = follow.querySelector('.hero-follow-icon');
-      icon.dataset.zone = String(zone);
-      icon.querySelector('img').src = ['assets/r4-home-up.svg','assets/r4-home-middle.svg','assets/r4-home-down.svg'][zone];
-    }
-  });
-  function showHeroZone(zone) { heroLens.show(zone); }
-  function followPointer(event) {
-    if (!hero.classList.contains('p5') || event.pointerType === 'touch') return;
-    const rect = heroStage.getBoundingClientRect();
-    const relativeY = event.clientY - rect.top;
-    const y = Math.max(30, Math.min(relativeY - 36, rect.height - 102));
-    follow.style.setProperty('--follow-y', y + 'px');
-    heroStage.classList.add('is-hovered');
-    showHeroZone(Math.max(0, Math.min(2, Math.floor(relativeY / rect.height * 3))));
-  }
-  heroStage.addEventListener('pointerenter', followPointer);
-  heroStage.addEventListener('pointermove', followPointer);
-  heroStage.addEventListener('pointerleave', () => heroStage.classList.remove('is-hovered'));
-  heroStage.addEventListener('pointercancel', () => heroStage.classList.remove('is-hovered'));
+  const heroVideo = document.getElementById('heroVideo');
+  heroVideo.muted = true;
+  function playHeroVideo() { const result=heroVideo.play(); if(result) result.catch(() => {}); }
+  playHeroVideo();
+  window.addEventListener('pageshow',playHeroVideo);
 
   /* ===================== Performance stat segment-fill ===================== */
   const FILL_ORDER = ['a', 'f', 'b', 'g', 'e', 'c', 'd'];
@@ -254,130 +230,6 @@
     statObserver.observe(statGrid);
   }
 
-  /* ===================== Categories (scroll-pinned) ===================== */
-  const CATS = [
-    { label:'승객용 엘리베이터', title:'서울대학교', english:'SEOUL NATIONAL UNIVERSITY', image:'assets/project-background.png' },
-    { label:'화물용 엘리베이터', title:'삼성전자', english:'SAMSUNG ELECTRONICS', image:'assets/project-samsung.png' },
-    { label:'에스컬레이터', title:'에스컬레이터', english:'ESCALATOR', image:'assets/project-escalator.png' },
-  ];
-
-  const categoriesSection = document.getElementById('products');
-  const categoryBgs = document.getElementById('categoryBgs');
-  const categoryTitle = document.getElementById('categoryTitle');
-  const categoryList = document.getElementById('categoryList');
-
-  CATS.forEach((c, i) => {
-    const bg = document.createElement('div');
-    bg.className = 'category-bg';
-    if (c.image) bg.style.backgroundImage = `url(${c.image})`;
-    categoryBgs.appendChild(bg);
-
-    const item = document.createElement('div');
-    item.className = 'category-item';
-    const glyphWrap = document.createElement('div');
-    glyphWrap.className = 'glyph';
-    const indicator = document.createElement('img');
-    indicator.src = `assets/project-digit-${i + 1}.svg`;
-    indicator.alt = '';
-    glyphWrap.appendChild(indicator);
-    const label = document.createElement('div');
-    label.className = 'label';
-    label.textContent = c.label;
-    item.appendChild(glyphWrap);
-    item.appendChild(label);
-    categoryList.appendChild(item);
-  });
-
-  const categoryBgEls = Array.from(categoryBgs.children);
-  const categoryItemEls = Array.from(categoryList.children);
-
-  const categoryEnglish = document.getElementById('categoryEnglish');
-  let productEntered = false;
-  let titleRun = 0;
-  let titleTimers = [];
-  function animateProductTitle(idx, direction = 1) {
-    titleRun++;
-    const run = titleRun;
-    titleTimers.forEach(clearTimeout);
-    titleTimers = [];
-    const previous = categoryTitle.lastElementChild;
-    Array.from(categoryTitle.children).forEach(el => { if (el !== previous) el.remove(); });
-    const next = document.createElement('span');
-    next.className = 'category-title-line';
-    next.style.setProperty('--enter-offset', direction > 0 ? '110%' : '-110%');
-    next.textContent = CATS[idx].title;
-    categoryTitle.appendChild(next);
-    categoryTitle.setAttribute('aria-label', CATS[idx].title);
-    if (previous) previous.setAttribute('aria-hidden', 'true');
-    const previousEnglish = categoryEnglish.lastElementChild;
-    Array.from(categoryEnglish.children).forEach(el => { if (el !== previousEnglish) el.remove(); });
-    const nextEnglish = document.createElement('span');
-    nextEnglish.className = 'category-english-line';
-    nextEnglish.textContent = CATS[idx].english;
-    categoryEnglish.appendChild(nextEnglish);
-    categoryEnglish.setAttribute('aria-label', CATS[idx].english);
-    if (previousEnglish) previousEnglish.setAttribute('aria-hidden','true');
-    categoryEnglish.classList.add('is-visible');
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      if (previous) previous.remove();
-      next.classList.add('is-current');
-      nextEnglish.classList.add('is-current');
-      if (previousEnglish) previousEnglish.remove();
-      return;
-    }
-    // Establish the incoming start position, then commit every product field together.
-    void next.offsetHeight;
-    if (previous) {
-      previous.style.setProperty('--exit-offset', direction > 0 ? '-110%' : '110%');
-      previous.classList.remove('is-current'); previous.classList.add('is-outgoing');
-    }
-    next.classList.add('is-current');
-    if (previousEnglish) previousEnglish.classList.remove('is-current');
-    nextEnglish.classList.add('is-current');
-    titleTimers.push(setTimeout(() => {
-      if (run !== titleRun) return;
-      if (previous) previous.remove();
-      if (previousEnglish) previousEnglish.remove();
-    }, 700));
-  }
-  function setActiveCategory(idx, direction = 1) {
-    categoriesSection.dataset.activeCategory = String(idx);
-    categoriesSection.dataset.direction = direction > 0 ? 'forward' : 'reverse';
-    CATS.forEach((c, i) => {
-      categoryBgEls[i].classList.toggle('is-active', i === idx);
-      categoryItemEls[i].classList.toggle('is-active', i === idx);
-    });
-    if (productEntered) animateProductTitle(idx, direction);
-  }
-  categoryEnglish.textContent = '';
-  setActiveCategory(0);
-
-  let currentCat = 0;
-  function handleCategoryScroll() {
-    if (!categoriesSection) return;
-    const r = categoriesSection.getBoundingClientRect();
-    if (productEntered && (r.top >= window.innerHeight || r.bottom <= 0)) {
-      productEntered = false;
-      titleRun++; titleTimers.forEach(clearTimeout); titleTimers = [];
-      categoryTitle.replaceChildren(); categoryEnglish.replaceChildren();
-    }
-    const span = r.height - window.innerHeight;
-    if (span <= 0) return;
-    const prog = Math.max(0, Math.min(0.9999, -r.top / span));
-    const cat = Math.floor(prog * CATS.length);
-    if (cat !== currentCat) {
-      const direction = cat > currentCat ? 1 : -1;
-      currentCat = cat;
-      setActiveCategory(cat, direction);
-    }
-    if (!productEntered && r.top <= window.innerHeight * .1 && r.bottom > 0) {
-      productEntered = true;
-      animateProductTitle(currentCat, 1);
-    }
-  }
-  window.addEventListener('scroll', handleCategoryScroll, { passive: true });
-  window.addEventListener('resize', handleCategoryScroll);
-
   /* ===================== Partners grid ===================== */
   const partnersGrid = document.getElementById('partnersGrid');
   for (let i = 1; i <= 21; i++) {
@@ -419,5 +271,4 @@
   } else {
     startIntro();
   }
-  handleCategoryScroll();
 })();
