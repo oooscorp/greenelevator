@@ -76,7 +76,7 @@
     var directStep=Number(new URLSearchParams(location.search).get('step'));
     if(Number.isInteger(directStep)&&directStep>=1&&directStep<=6){
       history.scrollRestoration='manual';
-      overlay.classList.add('is-done');header.classList.add('is-visible');
+      overlay.classList.add('is-done');header.classList.add('is-visible'); window.GreenHeaderScroll.ready();
       document.documentElement.style.overflow='';
       var index=directStep-1;
       populateImage(imageFrame.firstElementChild,items[index]);
@@ -94,7 +94,7 @@
     overlay.classList.remove('is-open','is-done');
     document.documentElement.style.overflow = 'hidden';
     if (reducedMotion) {
-      overlay.classList.add('is-done'); header.classList.add('is-visible');
+      overlay.classList.add('is-done'); header.classList.add('is-visible'); window.GreenHeaderScroll.ready();
       document.documentElement.style.overflow = ''; revealInnovation(); return;
     }
     later(introTimers, function () {
@@ -104,8 +104,7 @@
     later(introTimers, function () {
       overlay.classList.add('is-done');
       document.documentElement.style.overflow = '';
-      header.classList.add('is-visible');
-      previousY = window.scrollY;
+      header.classList.add('is-visible'); window.GreenHeaderScroll.ready();
       revealInnovation(); updateContent();
     }, 1750 + window.GreenDoorMotion.total);
   }
@@ -123,7 +122,7 @@
     });
     var button=document.createElement('button');
     button.type='button';button.className='tech-step-button';button.setAttribute('aria-label',String(index+1)+' '+items[index].title);
-    button.appendChild(svg);steps.appendChild(button);
+    button.appendChild(svg);var label=document.createElement('span');label.textContent=items[index].title;button.appendChild(label);steps.appendChild(button);
     button.addEventListener('click',function(){
       var top=window.scrollY+track.getBoundingClientRect().top;
       var span=track.offsetHeight-window.innerHeight;
@@ -210,15 +209,9 @@
     var progress = Math.max(0, Math.min(.99999, -rect.top / span));
     setItem(Math.min(5, Math.floor(progress * 6)));
   }
-  var previousY = window.scrollY, queued = false;
+  var queued = false;
   function update() {
     queued = false; updateContent();
-    var y = Math.max(0, window.scrollY);
-    if (header.classList.contains('is-visible')) {
-      if (y <= 1) header.classList.remove('is-hidden');
-      else if (Math.abs(y - previousY) >= 3) header.classList.toggle('is-hidden', y > previousY);
-    }
-    previousY = y;
   }
   window.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(update); } }, {passive:true});
   window.addEventListener('resize', updateContent);
@@ -226,7 +219,7 @@
   // Preload all three exact Figma images before their fixed-frame transitions.
   items.forEach(function (item) { var image = new Image(); image.src = item.image; });
   window.addEventListener('pageshow', function (event) {
-    if (event.persisted) { document.documentElement.style.overflow = ''; overlay.classList.add('is-done'); header.classList.add('is-visible'); current = -1; updateContent(); }
+    if (event.persisted) { document.documentElement.style.overflow = ''; overlay.classList.add('is-done'); header.classList.add('is-visible'); window.GreenHeaderScroll.ready(); current = -1; updateContent(); }
   });
   runIntro();
 })();

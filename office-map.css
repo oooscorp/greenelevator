@@ -33,3 +33,8 @@
 @media(max-width:1050px){.office-section{padding-left:5%;padding-right:5%;}.office-row-heading{gap:8px;}.office-row-heading h3{font-size:16px;}.office-details{font-size:14px;}.office-details-content{padding-left:18px;padding-right:18px;}.office-badge{font-size:10px;}}
 @media(max-width:700px){.office-section{min-height:0;padding:80px 24px;}.office-section h2{font-size:36px;margin-bottom:40px;margin-left:0;}.office-layout{grid-template-columns:1fr;}.office-map-canvas{width:70%;max-width:380px;margin-top:100px;}.office-toggle{width:36px;height:36px;}.office-toggle::before,.office-toggle::after{top:17px;}.office-details-content{padding-bottom:26px;}.office-row-heading h3{font-size:17px;}}
 @media(prefers-reduced-motion:reduce){.office-ripple{animation:none;}.office-row-heading{transition:none;}}
+
+/* Color travels through the map dots, never through the white background. */
+.office-dot-wave{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;}
+.office-dot-wave[hidden]{display:none;}
+.office-ripple{display:none;}

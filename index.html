@@ -8,16 +8,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="home.css?v=20261016-7">
-<link rel="stylesheet" href="home-products.css?v=20261017-1">
-<link rel="stylesheet" href="site-navigation.css?v=20261016-4">
+<link rel="stylesheet" href="home-products.css?v=20261019-1">
+<link rel="stylesheet" href="site-navigation.css?v=20261022-2">
 <link rel="preload" href="assets/tech-silver.png" as="image">
-</head>
+<link rel="stylesheet" href="nov13.css?v=1"></head>
 <body>
 
 <!-- ===================== 01 Hero / Intro ===================== -->
 <section class="hero" id="hero">
 
-  <header class="site-header  gnb-shell">
+  <header class="site-header  gnb-shell" data-gnb-intro>
   <a href="index.html" class="logo"><img src="assets/logo.png" alt="그린엘리베이터"></a>
   <nav class="gnb" aria-label="주 메뉴">
     <div class="gnb-company">
@@ -25,15 +25,15 @@
       <div class="gnb-submenu" id="companyMenu" hidden>
         <a href="about.html">회사개요</a>
         <a href="tech.html">기술력</a>
-        <span aria-disabled="true">연혁</span>
-        <span aria-disabled="true">조직도</span>
+        <a href="history.html">연혁</a>
+        <a href="organization.html">조직도</a>
       </div>
     </div>
     <a href="products.html">제품소개</a>
-    <a href="index.html#performance">실적</a>
-    <a href="#">유지보수</a>
-    <a href="#">교체공사</a>
-    <a href="#support">고객지원</a>
+    <a href="projects.html">실적</a>
+    <div class="gnb-company gnb-maintenance"><button type="button" class="gnb-company-toggle" aria-expanded="false" aria-controls="maintenanceMenu">유지보수</button><div class="gnb-submenu" id="maintenanceMenu" hidden><a href="service-contract.html">서비스계약</a><a href="maintenance.html">유지보수안내</a><a href="maintenance-guide.html">승강기 관리 가이드</a></div></div>
+    <div class="gnb-company gnb-replacement"><button type="button" class="gnb-company-toggle" aria-expanded="false" aria-controls="replacementMenu">교체공사</button><div class="gnb-submenu" id="replacementMenu" hidden><a href="replacement.html">교체공사 개요·효과</a><a href="replacement-procedure.html">교체공사 절차</a></div></div>
+    <div class="gnb-company gnb-support"><button class="gnb-company-toggle" aria-expanded="false" aria-controls="supportMenu">고객지원</button><div class="gnb-submenu" id="supportMenu" hidden><a href="notices.html">공지사항</a><a href="downloads.html">자료실</a><a href="inquiry.html">문의하기</a><a href="safety-guide.html">승강기 안전 가이드</a></div></div>
     <a href="#" class="lang-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><ellipse cx="8" cy="8" rx="2.8" ry="6.6"/><path d="M1.4 8h13.2"/></svg>KOR</a>
   </nav>
 </header>
@@ -124,14 +124,14 @@
 
 <!-- ===================== 07 Partners ===================== -->
 <section class="partners" id="performance-partners">
-  <div class="grid-lines"></div>
+  <div class="nov-lines-background" aria-hidden="true"></div><div class="nov-partners-title"><h2>OUR PARTNERS :</h2></div><div class="nov-line-intro" data-line-track><div class="nov-line-stage"><h2>OUR PARTNERS :</h2></div></div>
   <div class="partners-inner">
     <div class="partners-side">
       <div class="partners-sticky">
-        <h2>Our Partners</h2>
+        <h2>OUR PARTNERS :</h2>
       </div>
     </div>
-    <div class="partners-grid" id="partnersGrid"></div>
+    <div class="partners-grid" id="partnersGrid"><div class="partner-slot"><img src="assets/nov13-d09be.png" alt="파트너사 로고" style="--logo-w:170;--logo-h:28;--logo-y:0px" data-logo="0"></div><div class="partner-slot"><img src="assets/nov13-4814f.png" alt="파트너사 로고" style="--logo-w:190;--logo-h:43;--logo-y:0.5px" data-logo="1"></div><div class="partner-slot"><img src="assets/nov13-b4b8e.png" alt="파트너사 로고" style="--logo-w:240;--logo-h:49;--logo-y:0.5px" data-logo="2"></div><div class="partner-slot"><img src="assets/nov13-a9e9c.png" alt="파트너사 로고" style="--logo-w:110;--logo-h:110;--logo-y:5px" data-logo="3"></div><div class="partner-slot"><img src="assets/nov13-a3d5a.png" alt="파트너사 로고" style="--logo-w:80;--logo-h:80;--logo-y:0px" data-logo="4"></div><div class="partner-slot"><img src="assets/nov13-d2c36.png" alt="파트너사 로고" style="--logo-w:150;--logo-h:53;--logo-y:0.5px" data-logo="5"></div><div class="partner-slot"><img src="assets/nov13-701a4.png" alt="파트너사 로고" style="--logo-w:170;--logo-h:48;--logo-y:0px" data-logo="6"></div><div class="partner-slot"><img src="assets/nov13-30d1d.png" alt="파트너사 로고" style="--logo-w:110;--logo-h:70;--logo-y:-2px" data-logo="7"></div><div class="partner-slot"><img src="assets/nov13-5fc3f.png" alt="파트너사 로고" style="--logo-w:80;--logo-h:79;--logo-y:2.5px" data-logo="8"></div><div class="partner-slot"><img src="assets/nov13-ef9ea.png" alt="파트너사 로고" style="--logo-w:130;--logo-h:59;--logo-y:0.5px" data-logo="9"></div><div class="partner-slot"><img src="assets/nov13-7fc0a.png" alt="파트너사 로고" style="--logo-w:175.561;--logo-h:175.561;--logo-y:0px" data-logo="10"></div><div class="partner-slot"><img src="assets/nov13-fef79.png" alt="파트너사 로고" style="--logo-w:180;--logo-h:45;--logo-y:0.5px" data-logo="11"></div><div class="partner-slot"><img src="assets/nov13-1086c.png" alt="파트너사 로고" style="--logo-w:170;--logo-h:36;--logo-y:0px" data-logo="12"></div><div class="partner-slot"><img src="assets/nov13-d44bc.svg" alt="파트너사 로고" style="--logo-w:180;--logo-h:47.386;--logo-y:0px" data-logo="13"></div><div class="partner-slot"><img src="assets/nov13-ff23e.svg" alt="파트너사 로고" style="--logo-w:200;--logo-h:35.21;--logo-y:0px" data-logo="14"></div><div class="partner-slot"><img src="assets/nov13-1086c.png" alt="파트너사 로고" style="--logo-w:170;--logo-h:36;--logo-y:0px" data-logo="15"></div><div class="partner-slot"><img src="assets/nov13-d44bc.svg" alt="파트너사 로고" style="--logo-w:180;--logo-h:47.386;--logo-y:0px" data-logo="16"></div><div class="partner-slot"><img src="assets/nov13-ff23e.svg" alt="파트너사 로고" style="--logo-w:200;--logo-h:35.21;--logo-y:0px" data-logo="17"></div><div class="partner-slot"><img src="assets/nov13-1086c.png" alt="파트너사 로고" style="--logo-w:170;--logo-h:36;--logo-y:0px" data-logo="18"></div><div class="partner-slot"><img src="assets/nov13-d44bc.svg" alt="파트너사 로고" style="--logo-w:180;--logo-h:47.386;--logo-y:0px" data-logo="19"></div><div class="partner-slot"><img src="assets/nov13-ff23e.svg" alt="파트너사 로고" style="--logo-w:200;--logo-h:35.21;--logo-y:0px" data-logo="20"></div></div>
   </div>
 </section>
 
@@ -169,9 +169,9 @@
   </div>
 </footer>
 
-<script src="site-navigation.js?v=20261016-4"></script>
+<script src="site-navigation.js?v=20261022-2"></script>
 <script src="lens-zoom.js?v=20261016-4"></script>
-<script src="main.js?v=20261016-7"></script>
-<script src="home-products.js?v=20261017-1"></script>
-</body>
+<script src="main.js?v=20261022-2"></script>
+<script src="home-products.js?v=20261022-2"></script>
+<script src="nov13.js?v=1"></script></body>
 </html>

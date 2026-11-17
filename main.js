@@ -82,7 +82,7 @@
     homeHeader.inert = false;
     homeHeader.removeAttribute('aria-hidden');
     homeHeader.classList.remove('is-hidden');
-    headerScrollY = window.scrollY;
+    window.GreenHeaderScroll.ready();
   }
 
   function runSteps() {
@@ -232,17 +232,7 @@
 
   /* ===================== Partners grid ===================== */
   const partnersGrid = document.getElementById('partnersGrid');
-  for (let i = 1; i <= 21; i++) {
-    const slot = document.createElement('div');
-    slot.className = 'partner-slot';
-    const img = document.createElement('img');
-    img.src = `assets/plogo-${((i - 1) % 16) + 1}.png`;
-    img.alt = '파트너사 로고';
-    img.loading = 'lazy';
-    slot.appendChild(img);
-    partnersGrid.appendChild(slot);
-  }
-
+  // Figma's logo slots are supplied by the partners markup.
   /* ===================== Scroll to top ===================== */
   const toTopBtn = document.getElementById('toTopBtn');
   if (toTopBtn) {
@@ -252,18 +242,6 @@
   const homeHeader = document.querySelector('.site-header');
   homeHeader.inert = true;
   homeHeader.setAttribute('aria-hidden', 'true');
-  let headerScrollY = window.scrollY;
-  function updateHomeHeader() {
-    const y = Math.max(0, window.scrollY);
-    if (!hero.classList.contains('is-navigation-ready')) { headerScrollY = y; return; }
-    if (y <= 0) homeHeader.classList.remove('is-hidden');
-    else if (Math.abs(y - headerScrollY) >= 3) homeHeader.classList.toggle('is-hidden', y > headerScrollY);
-    headerScrollY = y;
-  }
-  window.addEventListener('scroll', updateHomeHeader, {passive:true});
-  window.addEventListener('pageshow', updateHomeHeader);
-  updateHomeHeader();
-
   /* ===================== Boot ===================== */
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) {

@@ -9,10 +9,10 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="tech.css?v=20261017-2">
 <link rel="stylesheet" href="tech-projects.css?v=20261016-8">
-<link rel="stylesheet" href="site-navigation.css?v=20261016-4">
+<link rel="stylesheet" href="site-navigation.css?v=20261022-2">
 <link rel="preload" href="assets/tech-silver.png" as="image">
 <link rel="preload" href="assets/tech-hero-updated.png" as="image">
-</head>
+<link rel="stylesheet" href="nov13.css?v=1"></head>
 <body class="tech-page">
 <!-- The closing half of the transition runs on the source page, over its actual content. -->
 <div class="tech-overlay" id="techOverlay" aria-label="엘리베이터 문 열림">
@@ -24,7 +24,7 @@
   </div>
   <div class="tech-door-seam" aria-hidden="true"></div>
 </div>
-<header class="site-header tech-header gnb-shell" id="techHeader">
+<header class="site-header tech-header gnb-shell" data-gnb-intro id="techHeader">
   <a href="index.html" class="logo"><img src="assets/logo.png" alt="그린엘리베이터"></a>
   <nav class="gnb" aria-label="주 메뉴">
     <div class="gnb-company">
@@ -32,20 +32,21 @@
       <div class="gnb-submenu" id="companyMenu" hidden>
         <a href="about.html">회사개요</a>
         <a href="tech.html" aria-current="page">기술력</a>
-        <span aria-disabled="true">연혁</span>
-        <span aria-disabled="true">조직도</span>
+        <a href="history.html">연혁</a>
+        <a href="organization.html">조직도</a>
       </div>
     </div>
     <a href="products.html">제품소개</a>
-    <a href="index.html#performance">실적</a>
-    <a href="#">유지보수</a>
-    <a href="#">교체공사</a>
-    <a href="#support">고객지원</a>
+    <a href="projects.html">실적</a>
+    <div class="gnb-company gnb-maintenance"><button type="button" class="gnb-company-toggle" aria-expanded="false" aria-controls="maintenanceMenu">유지보수</button><div class="gnb-submenu" id="maintenanceMenu" hidden><a href="service-contract.html">서비스계약</a><a href="maintenance.html">유지보수안내</a><a href="maintenance-guide.html">승강기 관리 가이드</a></div></div>
+    <div class="gnb-company gnb-replacement"><button type="button" class="gnb-company-toggle" aria-expanded="false" aria-controls="replacementMenu">교체공사</button><div class="gnb-submenu" id="replacementMenu" hidden><a href="replacement.html">교체공사 개요·효과</a><a href="replacement-procedure.html">교체공사 절차</a></div></div>
+    <div class="gnb-company gnb-support"><button class="gnb-company-toggle" aria-expanded="false" aria-controls="supportMenu">고객지원</button><div class="gnb-submenu" id="supportMenu" hidden><a href="notices.html">공지사항</a><a href="downloads.html">자료실</a><a href="inquiry.html">문의하기</a><a href="safety-guide.html">승강기 안전 가이드</a></div></div>
     <a href="#" class="lang-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><ellipse cx="8" cy="8" rx="2.8" ry="6.6"/><path d="M1.4 8h13.2"/></svg>KOR</a>
   </nav>
 </header>
 <main>
-  <section class="tech-innovation" id="techInnovation" aria-labelledby="innovationTitle">
+  <section class="nov-tech-lines"><div class="nov-lines-background" aria-hidden="true"></div>
+  <section class="tech-innovation nov-line-intro" id="techInnovation" aria-labelledby="innovationTitle" data-line-track><div class="nov-line-stage">
     <img class="tech-innovation-photo" src="assets/tech-hero-updated.png" alt="별빛 디자인을 적용한 그린엘리베이터 승강기 내부" fetchpriority="high">
     <div class="tech-innovation-shade"></div>
     <div class="tech-innovation-copy">
@@ -56,7 +57,7 @@
         <p>더욱 안전하고 정밀한 이동 환경을 만듭니다.</p>
       </div>
     </div>
-  </section>
+  </div></section>
   <!-- One pinned stage, six synchronized content states. No extra generic introduction. -->
   <section class="tech-content-track" id="techTrack" aria-label="기술 소개">
     <div class="tech-content-stage" id="techStage" data-step="1">
@@ -81,7 +82,7 @@
       <a class="tech-end-button" href="projects.html"><span class="tech-end-button-label">VIEW PROJECTS</span><span class="tech-end-button-icon"><img src="assets/tech-end-arrow.svg" width="13.072" height="12.901" alt=""></span></a>
     </div>
   </section>
-</main>
+</section></main>
 <footer class="site-footer" id="support">
   <div class="grid-lines grid-lines-dark"></div>
   <div class="footer-inner">
@@ -114,8 +115,8 @@
     </div>
   </div>
 </footer>
-<script src="site-navigation.js?v=20261016-4"></script>
-<script src="tech.js?v=20261017-2"></script>
+<script src="site-navigation.js?v=20261022-2"></script>
+<script src="tech.js?v=20261022-2"></script>
 <script src="tech-projects.js?v=20261016-8"></script>
-</body>
+<script src="nov13.js?v=1"></script></body>
 </html>

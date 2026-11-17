@@ -7,7 +7,8 @@
 .gnb-company{position:relative;}
 .gnb-company-toggle{display:block;padding:4px 0;border:0;border-bottom:1.5px solid transparent;background:none;color:#000;font:inherit;line-height:1.5;cursor:pointer;white-space:nowrap;}
 .gnb-shell.is-expanded{height:102px;}
-.gnb-shell.is-expanded .gnb-company-toggle{border-bottom-color:#0d5b44;}
+.gnb-company.is-current>.gnb-company-toggle{border-bottom-color:#0d5b44;}
+.gnb>a[aria-current="page"]{border-bottom:1.5px solid #0d5b44;}
 .gnb-submenu{position:absolute;top:48px;left:0;display:flex;gap:30px;align-items:center;height:20px;white-space:nowrap;font-size:14px;color:#999;}
 .gnb-submenu[hidden]{display:none;}
 .gnb-submenu a[aria-current="page"]{font-weight:700;color:#000;}
@@ -65,3 +66,13 @@
 /* Begin travel immediately; the seam disappears alongside the moving panels. */
 .hero .door,.tech-door,.navigation-door{--door-travel-time:1.45s;}
 .hero.p3 .door-seam,.tech-overlay.is-open .tech-door-seam{opacity:0;transition:opacity .1s linear;}
+
+/* Keep the maintenance submenu inside the header at every desktop width. */
+.gnb-maintenance .gnb-submenu{left:auto;right:0;}
+
+/* Shared GNB contract: initially visible, hide down, reveal up. Intro gates remain local. */
+.site-header.gnb-shell{position:fixed;}
+.site-header.gnb-shell:not([data-gnb-intro]){opacity:1;transform:translateY(0);pointer-events:auto;}
+.site-header.gnb-shell.is-hidden{transform:translate3d(0,-100%,0)!important;pointer-events:none!important;}
+
+.gnb-support .gnb-submenu{left:auto;right:0;}

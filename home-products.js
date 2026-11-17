@@ -11,7 +11,7 @@
     {title:'에스컬레이터',subtitle:'ESCALATOR',label:'에스컬레이터',src:'assets/home-product-escalator.png',icon:'assets/home-product-down.svg'}
   ];
   var intro={title:'공간을 넘어 일상을 잇다',subtitle:'사람과 공간이 만나는 곳에 더 나은 이동을 만듭니다.'};
-  var started=false,pinned=false,revealed=false,pointer=null,queued=false;
+  var started=false,pinned=false,revealed=false,queued=false;
   var distance=0,lastFrame=0,textRun=0,textTimers=[],currentText=-2;
   function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
   function later(fn,ms){textTimers.push(setTimeout(fn,reduced?0:ms));}
@@ -49,23 +49,23 @@
       if(pinned)changeText(index);
     }
   });
-  function updatePointer(){
-    var rect=stage.getBoundingClientRect();
-    var minY=subtitles[0].getBoundingClientRect().bottom-rect.top+40;
-    var y=pointer?pointer.y-rect.top:0;
-    // The title and subtitle are outside the hover region. They cannot change images.
-    var inside=!!(pointer&&pointer.x>=rect.left&&pointer.x<=rect.right&&y>=minY&&y<=rect.height);
-    stage.classList.toggle('is-hovered',revealed&&inside);
-    if(!revealed||!inside)return;
-    follow.style.setProperty('--product-follow-y',clamp(y-36,minY,Math.max(minY,rect.height-84))+'px');
-    var zone=clamp(Math.floor((y-minY)/Math.max(1,rect.height-minY)*3),0,2);
+  function updateBusinessArea(rect,vh){
+    // After the image reveal, give each business area an equal scroll interval.
+    var revealEnd=vh*1.85;
+    var travel=Math.max(1,track.offsetHeight-vh-revealEnd);
+    var progress=clamp((distance-revealEnd)/travel,0,.999999);
+    var zone=Math.floor(progress*3);
     lens.show(zone);
+    var minY=subtitles[0].getBoundingClientRect().bottom-rect.top+40;
+    var available=Math.max(0,rect.height-minY);
+    var y=minY+available*(zone+.5)/3-follow.offsetHeight/2;
+    follow.style.setProperty('--product-follow-y',clamp(y,minY,Math.max(minY,rect.height-follow.offsetHeight-24))+'px');
   }
   function render(now){
     queued=false;
     var rect=track.getBoundingClientRect(),vh=stage.offsetHeight;
     if(!started&&rect.top<vh*.35&&rect.bottom>0){started=true;changeText(-1);}
-    var target=clamp(-rect.top,0,vh*1.85);
+    var target=clamp(-rect.top,0,Math.max(0,track.offsetHeight-vh));
     var dt=lastFrame?Math.min(64,now-lastFrame):16.67;lastFrame=now;
     distance=reduced?target:distance+(target-distance)*(1-Math.exp(-dt/145));
     if(Math.abs(target-distance)<.25)distance=target;
@@ -80,14 +80,10 @@
     track.dataset.reveal=reveal.toFixed(4);
     revealed=reveal===1&&rect.bottom>0;
     stage.classList.toggle('is-revealed',revealed);
-    updatePointer();
+    updateBusinessArea(stage.getBoundingClientRect(),vh);
     if(distance!==target)schedule();else lastFrame=0;
   }
   function schedule(){if(!queued){queued=true;requestAnimationFrame(render);}}
-  function movePointer(event){if(event.pointerType==='touch')return;pointer={x:event.clientX,y:event.clientY};updatePointer();}
-  function leave(){pointer=null;stage.classList.remove('is-hovered');}
-  stage.addEventListener('pointerenter',movePointer);stage.addEventListener('pointermove',movePointer);
-  stage.addEventListener('pointerleave',leave);stage.addEventListener('pointercancel',leave);
   window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);window.addEventListener('pageshow',schedule);
   if(document.fonts)document.fonts.ready.then(schedule);
   schedule();

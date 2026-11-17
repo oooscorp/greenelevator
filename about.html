@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="about.css?v=20261017-1">
-<link rel="stylesheet" href="site-navigation.css?v=20261016-4">
+<link rel="stylesheet" href="site-navigation.css?v=20261022-2">
 <link rel="preload" href="assets/tech-silver.png" as="image">
-<link rel="stylesheet" href="office-map.css?v=20261017-2">
-</head>
+<link rel="stylesheet" href="office-map.css?v=20261020-1">
+<link rel="stylesheet" href="nov13.css?v=1"></head>
 <body>
 
 <!-- Fixed page-level grid -->
@@ -32,15 +32,15 @@
       <div class="gnb-submenu" id="companyMenu" hidden>
         <a href="about.html" aria-current="page">회사개요</a>
         <a href="tech.html">기술력</a>
-        <span aria-disabled="true">연혁</span>
-        <span aria-disabled="true">조직도</span>
+        <a href="history.html">연혁</a>
+        <a href="organization.html">조직도</a>
       </div>
     </div>
     <a href="products.html">제품소개</a>
-    <a href="index.html#performance">실적</a>
-    <a href="#">유지보수</a>
-    <a href="#">교체공사</a>
-    <a href="#support">고객지원</a>
+    <a href="projects.html">실적</a>
+    <div class="gnb-company gnb-maintenance"><button type="button" class="gnb-company-toggle" aria-expanded="false" aria-controls="maintenanceMenu">유지보수</button><div class="gnb-submenu" id="maintenanceMenu" hidden><a href="service-contract.html">서비스계약</a><a href="maintenance.html">유지보수안내</a><a href="maintenance-guide.html">승강기 관리 가이드</a></div></div>
+    <div class="gnb-company gnb-replacement"><button type="button" class="gnb-company-toggle" aria-expanded="false" aria-controls="replacementMenu">교체공사</button><div class="gnb-submenu" id="replacementMenu" hidden><a href="replacement.html">교체공사 개요·효과</a><a href="replacement-procedure.html">교체공사 절차</a></div></div>
+    <div class="gnb-company gnb-support"><button class="gnb-company-toggle" aria-expanded="false" aria-controls="supportMenu">고객지원</button><div class="gnb-submenu" id="supportMenu" hidden><a href="notices.html">공지사항</a><a href="downloads.html">자료실</a><a href="inquiry.html">문의하기</a><a href="safety-guide.html">승강기 안전 가이드</a></div></div>
     <a href="#" class="lang-toggle"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><ellipse cx="8" cy="8" rx="2.8" ry="6.6"/><path d="M1.4 8h13.2"/></svg>KOR</a>
   </nav>
 </header>
@@ -48,7 +48,7 @@
 <!-- ===================== S1 — 정직한 기술로 ===================== -->
 <section class="s1-wrap" id="s1">
   <div class="s1-sticky">
-    <div class="s1-image" id="s1Image"><div class="s1-image-inner" style="background-image:url(assets/about-elevator.png)"></div></div>
+    <div class="s1-image" id="s1Image"><div class="s1-image-inner nov-about-hero"><img src="assets/nov13-f4e1a.png" alt="승강기 내부"></div></div>
     <div class="s1-title-wrap" id="s1Title">
       <div class="s1-title-base"><h1><span class="s1-line"><span>정직한 기술로</span></span><span class="s1-line"><span>더 나은 내일을 향합니다</span></span></h1><p class="s1-intro-copy">&quot;그린엘리베이터(주)는 최고가 되겠습니다.&quot; 진정한 기술을 정직함이라<br>마음에 새기며, 항상 고객을 섬긴다는 생각으로 정성을 다하겠습니다.</p></div>
       <div class="s1-title-white" id="s1TitleWhite" aria-hidden="true"><h1><span class="s1-line"><span>정직한 기술로</span></span><span class="s1-line"><span>더 나은 내일을 향합니다</span></span></h1><p class="s1-intro-copy">&quot;그린엘리베이터(주)는 최고가 되겠습니다.&quot; 진정한 기술을 정직함이라<br>마음에 새기며, 항상 고객을 섬긴다는 생각으로 정성을 다하겠습니다.</p></div>
@@ -216,17 +216,17 @@
     </div>
 
 <!-- ===================== S6 — Header (natural scroll) ===================== -->
-<section class="s6-section" id="s6Section">
+<section class="nov-trust-track"><div class="nov-trust-sticky"><section class="s6-section" id="s6Section">
   <h2 class="s69-title"><span class="s1-line"><span>고객의 신뢰와 함께</span></span><span class="s1-line"><span>성장해왔습니다</span></span></h2>
   <p class="s69-sub">꾸준히 증가한 설치 실적과 유지관리 현장은 그린엘리베이터가 쌓아온<br>기술력과 신뢰를 보여줍니다. 앞으로도 더 많은 공간의 안전한 이동을 책임지겠습니다.</p>
-</section>
+</section><div class="nov-trust-image"><img src="assets/nov13-21df1.png" alt="고객의 신뢰와 함께 성장하는 유지관리 현장"></div></div></section>
 
 <!-- ===================== S7–S9 — 핵심 성과 (sticky stats) ===================== -->
 <section class="s69-wrap" id="s69">
   <div class="s69-sticky">
     <div class="s7-frame" id="s7Frame">
       <div class="s7-images">
-        <div class="s7-img is-active" data-slide="0" style="--shade-opacity:.4;background-image:url(assets/revision-performance-1.png)"></div>
+        <div class="s7-img is-active" data-slide="0" style="--shade-opacity:.4;background-image:url(assets/nov13-21df1.png)"></div>
         <div class="s7-img" data-slide="1" style="--shade-opacity:.4;background-image:url(assets/r4-performance-2.png)"></div>
         <div class="s7-img" data-slide="2" style="--shade-opacity:.4;background-image:url(assets/about-bright-3.png)"></div>
       </div>
@@ -270,7 +270,7 @@
 <section class="office-section" id="s10" data-office-map aria-labelledby="s10Title">
 <h2 id="s10Title">We are Here</h2>
 <div class="office-layout"><div class="office-rows"></div><div class="office-map-canvas">
-<img class="office-map-image" src="assets/offices-dots.svg" alt="대한민국 사업장 위치 지도">
+<img class="office-map-image" src="assets/nov13-map-latest.svg" alt="대한민국 사업장 위치 지도">
 <div class="office-marker"><span class="office-ripple"></span><svg viewBox="0 0 25 25" aria-hidden="true"><path d="M12.5 0a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Zm0 9.1a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Zm-9.1 0a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Zm18.2 0a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Zm-9.1 9.1a3.25 3.25 0 1 1 0 6.5 3.25 3.25 0 0 1 0-6.5Z"/></svg><span class="office-location-name"></span></div>
 </div></div></section>
 
@@ -306,9 +306,9 @@
   </div>
 </footer>
 
-<script src="about.js?v=20261017-1"></script>
-<script src="site-navigation.js?v=20261016-4"></script>
+<script src="green-motion.js"></script><script src="about.js?v=20261022-2"></script>
+<script src="site-navigation.js?v=20261022-2"></script>
 <script src="smooth-disclosure.js?v=20261017-2"></script>
-<script src="office-map.js?v=20261017-2"></script>
-</body>
+<script src="office-map.js?v=20261020-1"></script>
+<script src="nov13.js?v=1"></script></body>
 </html>

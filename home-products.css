@@ -1,6 +1,6 @@
 @font-face{font-family:'A2Z Product';src:url('assets/a2z-regular.otf') format('opentype');font-weight:400;font-display:swap;}
 /* Figma 29:368 — all four frames describe states of this single pinned stage. */
-.home-product-track{position:relative;height:375svh;background:#fff;}
+.home-product-track{position:relative;height:575svh;background:#fff;}
 .home-product-stage{position:sticky;top:0;height:100svh;overflow:hidden;isolation:isolate;}
 .product-mask-defs{position:absolute;pointer-events:none;}
 .product-reveal{position:absolute;inset:0;clip-path:url(#productRevealClip);z-index:1;pointer-events:none;}
@@ -19,8 +19,8 @@
 .product-line-frame>span{position:absolute;inset:0;display:block;white-space:nowrap;transform:translateY(var(--title-in,110%));transition:transform .85s cubic-bezier(.4,0,.2,1);}
 .product-line-frame>span.is-current{transform:translateY(0);}
 .product-line-frame>span.is-outgoing{transform:translateY(var(--title-out,-110%));}
-.product-follow{position:absolute;left:8.333333%;right:8.333333%;top:0;height:72px;z-index:4;display:flex;flex-direction:column;justify-content:space-between;color:#fff;opacity:0;pointer-events:none;transform:translate3d(0,var(--product-follow-y,326px),0);transition:opacity .2s ease;}
-.home-product-stage.is-revealed.is-hovered .product-follow{opacity:1;}
+.product-follow{position:absolute;left:8.333333%;right:8.333333%;top:0;height:72px;z-index:4;display:flex;flex-direction:column;justify-content:space-between;color:#fff;opacity:0;pointer-events:none;transform:translate3d(0,var(--product-follow-y,326px),0);will-change:transform;transition:transform 1.05s cubic-bezier(.65,0,.35,1),opacity .35s ease;}
+.home-product-stage.is-revealed .product-follow{opacity:1;}
 .product-follow-rule{display:block;width:100%;height:1.01409px;background:url('assets/home-product-rule.svg') center/100% 100% no-repeat;}
 .product-follow-row{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:700;line-height:1.5;}
 .product-follow-icon{display:flex;align-items:center;justify-content:center;flex:none;width:40px;height:40px;}

@@ -66,10 +66,22 @@
   };
   var header = document.querySelector('.gnb-shell');
   if (header) {
-    var toggle = header.querySelector('.gnb-company-toggle');
-    var menu = header.querySelector('.gnb-submenu');
-    var company = header.querySelector('.gnb-company');
-    function expand(on) { header.classList.toggle('is-expanded', on); toggle.setAttribute('aria-expanded', String(on)); menu.hidden = !on; }
+   var currentPath=location.pathname.split('/').pop()||'index.html';
+   header.querySelectorAll('.gnb a[href]').forEach(function(link){
+    if(link.classList.contains('lang-toggle')||link.getAttribute('href').startsWith('#'))return;
+    var path=new URL(link.href,location.href).pathname.split('/').pop();
+    if(path!==currentPath&&!(currentPath==='safety-training.html'&&path==='inquiry.html'))return;
+    link.setAttribute('aria-current','page');
+    var group=link.closest('.gnb-company');if(group)group.classList.add('is-current');
+   });
+   header.querySelectorAll('.gnb-company').forEach(function (company) {
+    var toggle = company.querySelector('.gnb-company-toggle');
+    var menu = company.querySelector('.gnb-submenu');
+    function expand(on) {
+      if(on)header.querySelectorAll('.gnb-company').forEach(function(other){if(other!==company){other.querySelector('.gnb-company-toggle').setAttribute('aria-expanded','false');other.querySelector('.gnb-submenu').hidden=true;}});
+      toggle.setAttribute('aria-expanded',String(on));menu.hidden=!on;
+      header.classList.toggle('is-expanded',!!header.querySelector('.gnb-company-toggle[aria-expanded="true"]'));
+    }
     company.addEventListener('pointerenter', function (event) { if (event.pointerType !== 'touch') expand(true); });
     header.addEventListener('pointerleave', function (event) { if (event.pointerType !== 'touch' && !header.contains(document.activeElement)) expand(false); });
     toggle.addEventListener('click', function (event) { expand(event.pointerType === 'mouse' || toggle.getAttribute('aria-expanded') !== 'true'); });
@@ -78,6 +90,31 @@
     document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && !menu.hidden) { expand(false); toggle.focus(); } });
     document.addEventListener('pointerdown', function (event) { if (!header.contains(event.target)) expand(false); });
     window.addEventListener('scroll', function () { expand(false); }, {passive:true});
+   });
+  }
+  // Every page uses the same 3px direction threshold and top-of-page reset.
+  // Intro pages opt in to readiness; ordinary and future pages work immediately.
+  if (header) {
+    var headerPreviousY = Math.max(0, window.scrollY);
+    var headerReady = !header.hasAttribute('data-gnb-intro');
+    function resetHeaderScroll() {
+      headerPreviousY = Math.max(0, window.scrollY);
+      header.classList.remove('is-hidden');
+    }
+    function updateHeaderScroll() {
+      var y = Math.max(0, window.scrollY);
+      if (!headerReady) { headerPreviousY = y; return; }
+      if (y <= 0) header.classList.remove('is-hidden');
+      else if (Math.abs(y - headerPreviousY) >= 3) header.classList.toggle('is-hidden', y > headerPreviousY);
+      headerPreviousY = y;
+    }
+    window.GreenHeaderScroll = {
+      ready: function () { headerReady = true; resetHeaderScroll(); },
+      reset: resetHeaderScroll
+    };
+    window.addEventListener('scroll', updateHeaderScroll, {passive:true});
+    window.addEventListener('pageshow', resetHeaderScroll);
+    updateHeaderScroll();
   }
   var navigating = false;
   document.addEventListener('click', function (event) {

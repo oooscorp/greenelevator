@@ -30,31 +30,7 @@
     return { svg: svg, segs: segs };
   }
 
-  function animateGlyph(container, ch, opts, onDone, schedule) {
-    var later = schedule || setTimeout;
-    var r = createGlyph(ch, opts);
-    container.innerHTML = '';
-    container.appendChild(r.svg);
-    var samples = ['8','H','2','E','9','P','4','U','6','F','3','b','7','C','0','L'];
-    var frame = 0;
-    function paint(value) {
-      Object.keys(r.segs).forEach(function(name) {
-        r.segs[name].style.transition = 'fill .07s ease';
-        r.segs[name].setAttribute('fill', (SEG[value] || '').indexOf(name) >= 0 ? opts.on : opts.off);
-      });
-    }
-    function cycle() {
-      if (frame < 6) { paint(samples[(frame++ * 5 + STAT_GLYPHS.indexOf(ch) * 3) % samples.length]); later(cycle,48); return; }
-      Object.keys(r.segs).forEach(function(name) { r.segs[name].style.transition='fill .16s ease'; r.segs[name].setAttribute('fill',opts.off); });
-      var order=FILL_ORDER.filter(function(name) { return (SEG[ch] || '').indexOf(name)>=0; }), index=0;
-      function settle() {
-        if(index<order.length) { r.segs[order[index++]].setAttribute('fill',opts.on); later(settle,65); }
-        else { container.dataset.displayedGlyph=ch; container.dataset.state='settled'; if(onDone) onDone(); }
-      }
-      later(settle,60);
-    }
-    container.dataset.state='cycling'; cycle();
-  }
+  function animateGlyph(container,ch,opts,onDone,schedule){return window.GreenMotion.animateGlyph(container,ch,opts,onDone,schedule);}
 
   /* ===================== Utility ===================== */
   function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
@@ -94,8 +70,8 @@
     var expand = clamp(distance / expandDistance, 0, 1);
     var margin = Math.min(120, Math.max(24, vw * .0833));
     var width = lerp(vw - 2 * margin, vw, expand);
-    var top = lerp(vh * .57, 0, expand) - Math.max(0, distance - expandDistance);
-    var height = lerp(vh * .43, vh, expand);
+    var top = lerp(Math.min(vh * .7, vw * 594 / 1440), 0, expand) - Math.max(0, distance - expandDistance);
+    var height = lerp(vw * 780 / 1440, vh, expand);
     var bottom = top + height;
     s1Image.style.top = '0px';
     s1Image.style.left = '0px';
@@ -279,24 +255,15 @@
   var photoCurrent=0;
   function cancelPhotoMotion() {
     photoAnimations.forEach(function(animation){animation.cancel();}); photoAnimations=[];
-    s7Frame.querySelectorAll('.s7-zoom-ghost').forEach(function(ghost){ghost.remove();});
+    s7Frame.querySelectorAll('.s7-zoom-ghost,.green-zoom-ghost').forEach(function(ghost){ghost.remove();});
   }
   function switchPhoto(index, first) {
     cancelPhotoMotion();
-    var old=s7Images[photoCurrent], next=s7Images[index];
-    s7Images.forEach(function(img,i){img.style.zIndex=i===index?'2':'0';img.style.opacity=i===index?'1':'0';img.style.transform='none';img.style.filter='none';});
+    photoAnimations=window.GreenMotion.photoTransition(Array.from(s7Images),index,photoCurrent,first);
     photoCurrent=index;
-    if(first || old===next || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    old.style.opacity='1';old.style.zIndex='1';
-    var easing='cubic-bezier(.16,.8,.2,1)';
-    var motion=next.animate([{transform:'scale(1.35)',filter:'blur(14px)'},{transform:'scale(1)',filter:'blur(0px)'}],{duration:1050,easing:easing});
-    photoAnimations.push(motion,next.animate([{opacity:0},{opacity:1}],{duration:367.5,easing:'linear'}),old.animate([{transform:'scale(1)',filter:'brightness(1)'},{transform:'scale(1.045)',filter:'brightness(.76)'}],{duration:1050,easing:easing}));
-    [1.5,1.65].forEach(function(scale,i){
-      var ghost=next.cloneNode(false);ghost.classList.add('s7-zoom-ghost');ghost.removeAttribute('data-slide');ghost.style.zIndex=String(3+i);next.parentElement.appendChild(ghost);
-      photoAnimations.push(ghost.animate([{transform:'scale('+scale+')',filter:'blur(14px)',opacity:.12-i*.035},{transform:'scale(1)',filter:'blur(0px)',opacity:0}],{duration:1050,easing:easing,fill:'forwards'}));
-    });
-    motion.finished.then(function(){if(photoCurrent!==index)return;cancelPhotoMotion();old.style.opacity='0';}).catch(function(){});
+    if(photoAnimations.length)photoAnimations[0].finished.then(function(){if(photoCurrent===index)cancelPhotoMotion();}).catch(function(){});
   }
+
   function resetS69() {
     cancelPhotoMotion();
     statRun++;
@@ -315,7 +282,7 @@
   function updateS69() {
     if (!s69Wrap) return;
     var rect = s69Wrap.getBoundingClientRect();
-    var visible = rect.top < window.innerHeight * .25 && rect.bottom > window.innerHeight * .65;
+    var visible = rect.top <= 0 && rect.bottom > window.innerHeight * .65;
     if (!visible) {
       if (s69Inside) resetS69();
       return;
@@ -361,14 +328,7 @@
   }
 
   var detailsPlane=document.getElementById('s7DetailsPlane');
-  s7Frame.addEventListener('pointermove',function(event){
-    if(event.pointerType==='touch')return;
-    var rect=s7Frame.querySelector('.s7-images').getBoundingClientRect();
-    var inside=event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom;
-    detailsPlane.classList.toggle('is-hovered',inside);
-    if(inside)detailsPlane.style.setProperty('--details-y',clamp(event.clientY-rect.top-36,12,Math.max(12,rect.height-84))+'px');
-  });
-  s7Frame.addEventListener('pointerleave',function(){detailsPlane.classList.remove('is-hovered');});
+  // Detail graphics follow scroll state in nov13.js, matching the home business-area stage.
 
   /* ===================== Scroll to top ===================== */
   var toTopBtn = document.getElementById('toTopBtn');
@@ -386,19 +346,6 @@
     document.documentElement.style.setProperty('--about-grid-column', step + 'px');
   }
   measurePageGrid();
-  /* Fixed header visibility follows scroll direction without shifting content. */
-  var header = document.getElementById('aboutHeader');
-  var previousY = window.scrollY;
-  function updateHeader() {
-    var y = Math.max(0, window.scrollY);
-    if (!header) return;
-    if (y <= 0) header.classList.remove('is-hidden');
-    else if (Math.abs(y - previousY) >= 3) {
-      header.classList.toggle('is-hidden', y > previousY);
-    }
-    previousY = y;
-  }
-
   /* Short, time-based interpolation keeps image and text/mask synchronized. */
   var frameId = null, lastFrame = 0, smoothDistance = null;
   function renderFrame(now) {
@@ -417,7 +364,6 @@
     if (smoothDistance !== target) frameId = requestAnimationFrame(renderFrame);
   }
   function onScroll() {
-    updateHeader();
     if (frameId === null) frameId = requestAnimationFrame(renderFrame);
   }
   window.addEventListener('scroll', onScroll, {passive:true});
